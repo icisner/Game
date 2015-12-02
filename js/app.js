@@ -22,7 +22,7 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     if (this.x >= 400) {
-        this.x=40
+        this.x=40;
     } 
     else {
         this.x=this.x+dt*this.speed;
@@ -61,7 +61,7 @@ var fSpeed=function(){
 var Player=function(iniX,iniY){
     this.x=iniX;
     this.y=iniY;
-    this.sprite = 'images/char-boy.png'
+    this.sprite = 'images/char-boy.png';
 };
 
 
@@ -78,8 +78,10 @@ Player.prototype.handleInput=function(sKey){
 
  switch (sKey) {
   case 'left':
-    if (this.x == 0) {this.x = 0;
-    } else {this.x = this.x-100;
+    if (this.x == 0)
+     {this.x = 0;
+    } else 
+       {this.x = this.x-100;
       console.log("left", this.x, this.y);
     }
     break;
@@ -125,13 +127,13 @@ var player=new Player(100,350);
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player objec((t in a variable called player
-var allEnemies =new Array();
+var allEnemies = new Array();
 
 
 for(i=0;i<=4;i++)
 {
        allEnemies.push(new Enemy(40,50+50*i,fSpeed()));
-};
+}
  
 
 // This listens for key presses and sends the keys to your

@@ -127,7 +127,7 @@ var player=new Player(100,350);
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player objec((t in a variable called player
-var allEnemies = new Array();
+var allEnemies = [];
 
 
 for(i=0;i<=4;i++)

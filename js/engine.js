@@ -47,8 +47,20 @@ var Engine = (function(global) {
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
+       
+        if (player.nGameOver===1)
+            {
+                alert("GAME OVER !!!");
+                player.nGameOver=0;
+                update(dt);
+                render();
+            }
+        if (nStop===0)
+        {
         update(dt);
         render();
+        }
+
 
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
@@ -183,4 +195,5 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
+    nStop=0;
 })(this);

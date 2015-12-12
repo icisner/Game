@@ -1,6 +1,6 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
-
-for self-checking their submission.
+To run this game you can open index.html 
+then you can use arrows to move to reack the water row
+The game will end at that point you can refresh the screen to play again

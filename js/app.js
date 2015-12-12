@@ -61,6 +61,7 @@ var fSpeed=function(){
 var Player=function(iniX,iniY){
     this.x=iniX;
     this.y=iniY;
+    nGameOver=0;
     this.sprite = 'images/char-boy.png';
 };
 
@@ -78,22 +79,23 @@ Player.prototype.handleInput=function(sKey){
 
  switch (sKey) {
   case 'left':
-    if (this.x == 0)
+    if (this.x === 0)
      {this.x = 0;
     } else 
        {this.x = this.x-100;
-      console.log("left", this.x, this.y);
+      
     }
     break;
 
   case 'right':
     if (this.x == 400) {this.x = 400;
     } else { this.x += 100;
-      console.log("right", this.x, this.y);
+      
     }
     break;
 
   case 'up': 
+                 
     if (this.y == 60) 
         {
             
@@ -102,7 +104,13 @@ Player.prototype.handleInput=function(sKey){
     
     if (this.y > -10) 
     { this.y =this.y- 90;
-      console.log("up", this.x, this.y);
+      
+    }
+
+    if (this.y<=-10)
+    {
+        this.nGameOver=1;
+        nStop=1;
     }
     break;
 
@@ -110,17 +118,22 @@ Player.prototype.handleInput=function(sKey){
     if (this.y < 350) {
         
          this.y = this.y+90;
-        console.log("down", this.x, this.y);
+      
     }
     break;
   }
+ 
 };
 
 
 Player.prototype.iniPosition=function(){
     this.x=100;
     this.y=350;
+    nGameOver=0;
+    
 };
+
+
 
 var player=new Player(100,350);
 

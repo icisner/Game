@@ -1,0 +1,2 @@
+var nStop= 0;
+

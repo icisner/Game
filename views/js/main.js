@@ -450,6 +450,9 @@ var resizePizzas = function(size) {
   }
 
   // Iterates through pizza elements on the page and changes their widths
+  //******************************************************************************************************
+  // Taking out nPC, dx, newwidth from the loop to spped up process 
+  //******************************************************************************************************
   function changePizzaSizes(size) {
       var nPC=document.querySelectorAll(".randomPizzaContainer").length;
       var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[0], size);      
@@ -503,6 +506,10 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
+//*******************************************************************************
+//Removing nST, nlen, items variables outside of for loop to speed up the process
+// ******************************************************************************
+
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
@@ -530,6 +537,11 @@ function updatePositions() {
 window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
+//******************************************************************************************************
+// Reducing number of pizzas from 200 to 32 to improve speed and to avoid pizzas not displayed in screen
+// created vector to reduce canculation in posiiton since fix numbers and taking out from the for loop
+// using optimized picture for pizza called pizza_small.jpg 
+//******************************************************************************************************
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;

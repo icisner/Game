@@ -450,19 +450,30 @@ var resizePizzas = function(size) {
   }
 
   // Iterates through pizza elements on the page and changes their widths
-  //******************************************************************************************************
-  // Taking out nPC, dx, newwidth from the loop to spped up process 
-  //******************************************************************************************************
   function changePizzaSizes(size) {
-      var nPC=document.querySelectorAll(".randomPizzaContainer").length;
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[0], size);      
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[0].offsetWidth + dx) + 'px';
-      //document.querySelectorAll(".randomPizzaContainer")[0].style.width = newwidth;
 
+      switch(size){
+        case "1":
+          newWidth=25;
+          break;
+        case "2":
+          newWidth=33.33;
+          break;
+        case "3":
+          newWidth=50;
+          break;
+        }
 
-    for (var i = 0; i < nPC; i++) {
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
-    }
+//******************************************************************************************************
+// Taking out unnecessary variables out from loop and to prevent FSL 
+//******************************************************************************************************
+
+      var smallPizzas=document.querySelectorAll(".randomPizzaContainer");
+      var nPC=smallPizzas.length
+
+     for (var i = 0; i < nPC; i++) {
+      smallPizzas[i].style.width=newWidth+"%";
+       }
   }
 
   changePizzaSizes(size);
@@ -517,11 +528,25 @@ function updatePositions() {
   var items = document.querySelectorAll('.mover');
   var nlen=items.length;
   var nST = document.body.scrollTop / 1250;
+  var halfScreenWidth = ((window.innerWidth > 0) ? window.innerWidth : screen.width) / 2;
+  var scrollA=[];
 
-  for (var i = 0; i < nlen; i++) {
-    var phase = Math.sin(nST + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-  }
+//*******************************************************************************
+//Adding another loop to store offset into an Array and removing for style loop
+//*******************************************************************************
+
+   for (var i = 0; i < nlen; i++) {
+    scrollA[i]=Math.sin(nST + (i % 5));
+   } 
+
+//*******************************************************************************
+//using transform function to avoid trigering Layout and Painting events
+//*******************************************************************************
+
+    for (var i = 0; i < nlen; i++) {
+       var phase = scrollA[i % 5];
+       items[i].style.transform = 'translateX('+(items[i].basicLeft + 100 * phase - halfScreenWidth) + 'px)';
+   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
@@ -548,6 +573,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var nPos1=[0,256,512,768,1024,1280,1536,1792]
   var nPos2=[0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3]
 
+
   for (var i = 0; i < 32; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
@@ -556,7 +582,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = nPos1[i % cols];
     elem.style.top = (nPos2[i]* s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+ document.querySelector("#movingPizzas1").appendChild(elem); 
   }
   updatePositions();
 });

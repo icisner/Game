@@ -465,7 +465,7 @@ var resizePizzas = function(size) {
         }
 
 //******************************************************************************************************
-// Taking out unnecessary variables out from loop and to prevent FSL 
+//      Taking out unnecessary variables out from loop and to prevent FSL 
 //******************************************************************************************************
 
       var smallPizzas=document.querySelectorAll(".randomPizzaContainer");
@@ -517,9 +517,9 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
-//*******************************************************************************
-//Removing nST, nlen, items variables outside of for loop to speed up the process
-// ******************************************************************************
+//************************************************************************************
+//   Removing nST, nlen, items variables outside of for loop to speed up the process
+//************************************************************************************
 
 function updatePositions() {
   frame++;
@@ -531,16 +531,16 @@ function updatePositions() {
   var halfScreenWidth = ((window.innerWidth > 0) ? window.innerWidth : screen.width) / 2;
   var scrollA=[];
 
-//*******************************************************************************
-//Adding another loop to store offset into an Array and removing for style loop
-//*******************************************************************************
+//**********************************************************************************
+//  Adding another loop to store offset into an Array and removing for style loop
+//**********************************************************************************
 
    for (var i = 0; i < nlen; i++) {
     scrollA[i]=Math.sin(nST + (i % 5));
    } 
 
 //*******************************************************************************
-//using transform function to avoid trigering Layout and Painting events
+//   using transform function to avoid trigering Layout and Painting events
 //*******************************************************************************
 
     for (var i = 0; i < nlen; i++) {
@@ -562,11 +562,11 @@ function updatePositions() {
 window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
-//******************************************************************************************************
-// Reducing number of pizzas from 200 to 32 to improve speed and to avoid pizzas not displayed in screen
+//********************************************************************************************************************
+// Reducing number of pizzas from 200 to 32 to improve speed and to avoid pizzas that are not displayed in screen
 // created vector to reduce canculation in posiiton since fix numbers and taking out from the for loop
 // using optimized picture for pizza called pizza_small.jpg 
-//******************************************************************************************************
+//********************************************************************************************************************
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
@@ -577,7 +577,7 @@ document.addEventListener('DOMContentLoaded', function() {
   for (var i = 0; i < 32; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza_small.png";
+    elem.src = "images/pizza_small1.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = nPos1[i % cols];

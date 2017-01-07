@@ -1,0 +1,77 @@
+
+#sApp{
+    background-color: #333;
+	}
+#map {
+    width: 600px;
+    height: 500px;
+    background-color: #CCC;
+    position: absolute;
+    right: 0px;
+   	top: 10px;    
+  }
+#control{
+		background-color: #333;
+		font-size: 28px;
+		color: #999;
+		padding: 24px;
+	}
+
+#control input[type=text]{
+		width: 20%;
+		height: 20px;
+		font-size: 14px;
+	}	
+
+#filter {
+		font-size: 28px;
+		color: #999;
+	}	
+#sListAll ul{ 
+	list-style: none;
+	margin: 0px;
+	padding: 0;
+	}
+ #sListAll ul li{
+	height: 40px;
+	} 
+#sListAll ul li a{
+	display: block;;
+	width: 300px;
+	padding: 10px 10px 10px 10px;
+	font-size: 20px;
+	font-family: Arial, Helvetica, san-serif;
+	text-decoration: :none;	
+	}
+		
+.sList1{
+	background-color: #333;
+	color:gray ;
+	border: #1E1E1E 3px solid;
+}
+#sListAll ul li a:hover{ 
+	background-color: #2d5986;
+}
+@media screen and (max-width:680px) {
+  ul.topnav li:not(:first-child) {display: none;}
+  ul.topnav li.icon {
+    float: right;
+    display: inline-block;
+  }
+}
+@media screen and (max-width:680px) {
+  ul.topnav.responsive {position: relative;}
+  ul.topnav.responsive li.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  ul.topnav.responsive li {
+    float: none;
+    display: inline;
+  }
+  ul.topnav.responsive li a {
+    display: block;
+    text-align: left;
+  }
+}

@@ -1,13 +1,62 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>PHP</title>
-</head>
-<body>
 
-<script language="php">
-	echo "<p>&copy;".date('Y')." Ivan</p>";
+  <head>
+	<title>Local Restauranrs</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+		
+	 <script language="javascript" type="text/javascript" src="ko/knockout-3.4.0.js"></script>
+	 <script src="ko/komapping-2.4.1.js"></script>
+<!--	 <script src="js/jquery-2.2.4.min.js"></script> -->
+	 <script src="js/jquery-1.12.4.min.js"></script>
+	 <script src="js/jquery-ui.min.js"></script>
+	 <script src="js/oauth-signature.js"></script>
+	 
+  </head>
+  <style>
+    #draggable { width: 150px; height: 150px; padding: 0.5em; }
+  </style>
+  <body id="sApp">
+	<div id="control">
+		<h2>Local Restaurants</h2>
+		<p>Enter Zip Code to Start</p>
+			<input data-bind="value:ZipCode">
+			<p>
+				<button data-bind="click:disZipCode">Search</button>
+				<p>
+					<input data-bind="visible:flagZip" type="text" name="">
+					<button data-bind="visible:flagZip" type="button" onclick="alert('Hello world!')">Filter</button>
+				</p>
+			</p>
+	</div>
 
-</script>
-</body>
+<div id = "filter">
+	<p>Filter</p>
+<input placeholder="Search..." type="search" name="q" data-bind="value: sQuery, event: { input: fCleared }">
+<button type="button" data-bind="click:sSearch">Filter</button>
+<p>
+</p>
+</div>
+<div id="sListAll">
+	<ul data-bind="foreach: vFilterArray">
+		<li data-bind = "click: $parent.oMarkerInfo"><a class="sList1" href='#'><span data-bind="text: name"></span></a> 
+			<!-- <li data-bind = "click: $parent.oMarkerInfo.bind($data,$index())"><a class="sList1" href='#'><span data-bind="text: name , event { click: $parent.oMarkerInfo }"></span></a> -->        
+        </li>
+         <br>
+ 	</dl>		
+</div>    
+
+<script language="javascript" type="text/javascript" src="js/main.js"></script>
+<script language="javascript" type="text/javascript" src="js/map.js"> </script> 
+<script language="javascript" type="text/javascript" src="js/app.js"> </script> 
+	
+	<div id="map"></div>
+	
+	<script> initMap;</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBf_LgqHPFPxbBUk4Cv4AUaexm56EgyS8&libraries=places&callback=initMap"
+        async defer></script>
+	
 </html>
+
+

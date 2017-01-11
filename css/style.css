@@ -3,8 +3,8 @@
     background-color: #333;
 	}
 #map {
-    width: 600px;
-    height: 500px;
+    width: 70%;
+    height: 100%;
     background-color: #CCC;
     position: absolute;
     right: 0px;
@@ -37,7 +37,8 @@
 	} 
 #sListAll ul li a{
 	display: block;;
-	width: 300px;
+	width: 30%;
+	height: 100%;
 	padding: 10px 10px 10px 10px;
 	font-size: 20px;
 	font-family: Arial, Helvetica, san-serif;

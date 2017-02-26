@@ -1,7 +1,4 @@
 
-/* var vm = new AppViewModel();
-ko.applyBindings(vm); */
-
       var map;
       var geocoder;
       var markers = [];
@@ -36,8 +33,7 @@ ko.applyBindings(vm); */
         map = new google.maps.Map(document.getElementById('map'), options);
         geocoder = new google.maps.Geocoder();
         fsearchPoint(searchArea);
-       // infowindow = new google.maps.InfoWindow();
-       // infowindows.push(infowindow);
+      
 
      }
 
@@ -58,7 +54,7 @@ function geocodeAddress(address) {
            
 
             map.setCenter(results[0].geometry.location);
-            markers=[];
+            fClearMarkersMapAll();
             vm.fCleanArray();
             fsearchPoint(results[0].geometry.location);
 
@@ -69,7 +65,14 @@ function geocodeAddress(address) {
         });
       }
 
-
+ function fClearMarkersMapAll() {
+    var cMap;
+      cMap=null;
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(cMap);
+        }
+        markers=[];
+      }
 
 
       function callback(results, status) {

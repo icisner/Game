@@ -3,6 +3,7 @@
 ko.applyBindings(vm); */
 
       var map;
+      var geocoder;
       var markers = [];
       var infowindows=[];
       var infowindow;
@@ -16,26 +17,60 @@ ko.applyBindings(vm); */
             lng: -98.5
           },
           zoom: 14,
+          mapTypeControl: true,
+          mapTypeControlOptions: {
+              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+              position: google.maps.ControlPosition.TOP_CENTER
+          },
           visible: true,
           disableDefaultUI : false,
-          scrollwheel : false,
+          scrollwheel : true,
           draggable: true,
           maxZoom: 20,
           minZoom: 8,
           mapTypeId: 'terrain' //hybrid
+
         }
 
         searchArea = {lat: options.center.lat, lng: options.center.lng };
         map = new google.maps.Map(document.getElementById('map'), options);
+        geocoder = new google.maps.Geocoder();
+        fsearchPoint(searchArea);
        // infowindow = new google.maps.InfoWindow();
        // infowindows.push(infowindow);
-        var service = new google.maps.places.PlacesService(map);
+
+     }
+
+function fsearchPoint(sSearchArea){
+       var service = new google.maps.places.PlacesService(map);
         service.textSearch({
-          location: searchArea,
+          location: sSearchArea,
           radius: 2000,
           type: ['restaurant']
         }, callback);
       }
+
+function geocodeAddress(address) {
+        var address1 = address+',USA';
+        
+        geocoder.geocode({'address': address1}, function(results, status) {
+          if (status === 'OK') {
+           
+
+            map.setCenter(results[0].geometry.location);
+            markers=[];
+            vm.fCleanArray();
+            fsearchPoint(results[0].geometry.location);
+
+
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+
+
+
 
       function callback(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -118,7 +153,7 @@ ko.applyBindings(vm); */
         }
 
        }
-
+  
     function uPdateLabel(data){
             contentString ='<div id="content">'+
               '<div id="siteNotice"></div>'+

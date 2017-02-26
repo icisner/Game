@@ -1,4 +1,5 @@
 
+
 function ObjRes(name, addr, Y, X){
 	this.name=ko.observable(name);
 	this.addr=ko.observable(addr);
@@ -12,14 +13,15 @@ function AppViewModel() {
 	var self=this;
 	
 	this.ZipCode = ko.observable("");
-	this.flagZip=ko.observable(false);
+	/*this.flagZip=ko.observable(false);*/
   this.sQuery=ko.observable("");
   this.sFilterList = ko.observable("");
   this.ResArray=ko.observableArray([]);
   this.vFilterArray=ko.observableArray([]);
 
 	this.disZipCode=function(){
-		console.log(ZipCode);
+		console.log(this.ZipCode());
+    geocodeAddress(this.ZipCode());
 	}; 
 
    this.AddRes = function(name, addr, Y, X){
@@ -31,19 +33,16 @@ function AppViewModel() {
         fClearMarkers();      
       };
 
-      //self.oMarkerInfo = function(data, item){
        self.oMarkerInfo = function(data, item){ 
-        openWindowMarker(this);
-      /*  for (var i=0; i < self.ResArray().length;i++){
-          if(self.ResArray()[i].name()== item.name())
-          {
-            
-            openWindowMarker(self.ResArray()[i]);
-          }
-        }*/
-      
+        openWindowMarker(this);     
       };
   
+
+  self.fCleanArray = function(){
+    self.ResArray([]);
+    self.vFilterArray([]);
+  }
+
    self.sSearch= function() {
     var txt=this.sQuery();
       self.vFilterArray([]);

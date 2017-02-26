@@ -1,78 +1,205 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+*{
+  /*-webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -ms-box-sizing:border-box;*/
+  
+/*  box-sizing:border-box;*/
 
-#sApp{
-    background-color: #333;
-	}
-#map {
-    width: 70%;
-    height: 100%;
-    background-color: #CCC;
-    position: absolute;
-    right: 0px;
-   	top: 10px;    
-  }
-#control{
-		background-color: #333;
-		font-size: 28px;
-		color: #999;
-		padding: 24px;
-	}
+  margin:0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
 
-#control input[type=text]{
-		width: 20%;
-		height: 20px;
-		font-size: 14px;
-	}	
+.nav-toggle-btn{
+  position: fixed;
+  padding: 15px 20px;
+  color: white;
+  cursor: pointer;
+  background-color: #999;
+  font-size: 2em;
+  position: absolute;
+  z-index: 1;
 
-#filter {
-		font-size: 28px;
-		color: #999;
-	}	
-#sListAll ul{ 
-	list-style: none;
-	margin: 0px;
-	padding: 0;
-	}
- #sListAll ul li{
-	height: 40px;
-	} 
-#sListAll ul li a{
-	display: block;;
-	width: 30%;
-	height: 100%;
-	padding: 10px 10px 10px 10px;
-	font-size: 20px;
-	font-family: Arial, Helvetica, san-serif;
-	text-decoration: :none;	
-	}
-		
-.sList1{
-	background-color: #333;
-	color:gray ;
-	border: #1E1E1E 3px solid;
 }
-#sListAll ul li a:hover{ 
-	background-color: #2d5986;
+
+.sidebar-menu{
+  position: fixed;
+  width: 20vw;
+  min-width: 100px;
+  margin-left: 0px;
+  height: 100%;
+  max-height: 100vh;
+  background-color: #333;
+  opacity: 0.9;
+  transition:all 0.3s ease-in-out;
+  transform:translateX(0vw);
+  transition:transform 0.6s ease;
 }
-@media screen and (max-width:680px) {
-  ul.topnav li:not(:first-child) {display: none;}
-  ul.topnav li.icon {
-    float: right;
-    display: inline-block;
-  }
+
+.sidebar-menu.open{
+  
+  transform:translateX(25vw);
 }
-@media screen and (max-width:680px) {
-  ul.topnav.responsive {position: relative;}
-  ul.topnav.responsive li.icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  ul.topnav.responsive li {
-    float: none;
-    display: inline;
-  }
-  ul.topnav.responsive li a {
-    display: block;
-    text-align: left;
-  }
+
+.nav-close-btn{
+  right: 10px;
+  top: 10px;
+  opacity: 0.7;
+  cursor: pointer;
+  color: white;
+  transition:all 0.3s ease-in-out;
+  position: absolute;  
+  
 }
+
+.nav-close-btn:hover{
+  opacity: 1;
+}
+
+
+.control{
+  color: white;
+  padding: 10px;
+  font-weight: 100;
+  font-family: 'Open Sans';
+  font-size: 16px;
+ background: #333;
+}
+
+.Zip-label{
+
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.Filter-label{
+  color: white;
+padding: 10px;
+font-size: 16px;
+}
+
+.filter{
+  color: black;
+  padding: 10px;
+ font-weight: 100;
+  font-family: 'Open Sans';
+  font-size: 18px;
+background: #333; 
+
+}
+.nav-list-container{
+overflow-y:auto; 
+height: 100vh;
+background: #333;
+
+}
+
+.nav-items{
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+
+  /*overflow: scroll;*/
+ /*margin-left: 25px; */
+}
+
+.nav-item{
+  
+  font-weight: 100;
+  font-family: 'Open Sans';
+  font-size: 18px;
+  color:white;
+  padding: 15px 5px 15px 20px ;
+  box-sizing: border-box;
+  border: solid 1px #D8D8D8;
+  transition:all 0.3s ease-in-out;  
+  cursor: pointer;
+  text-align: left;
+
+
+}
+
+.nav-idv-item{
+  color:white;
+}
+
+.nav-item:hover{
+  background: #024b9d;
+}
+
+.wrapper{
+  transform:translateX(0vw);
+    transition:transform 0.6s ease;
+}
+
+.wrapper.open{
+ transform:translateX(0vw);
+}
+
+.wrapper.close{
+ transform:translateX(-20vw);
+}
+
+
+.outer-wrapper{
+  
+}
+
+.mapSection{
+  background: #666;
+  height: 100vh;
+  width: 100vw;
+ left:20vw;
+ position: absolute;
+}
+
+.mapContent{
+
+}
+
+.mapMain{
+height: 100%;
+width: 100%;
+float: right;
+float top;
+position: absolute;
+margin-left: 0vw;
+z-index: 0;
+
+}
+      /* If there is enough space (> 600px), we keep the drawer open all the time. */
+
+ @media only screen and (max-width: 800px) {
+
+  .wrapper{
+    transform:translateX(-20vw);
+    }
+
+  .wrapper.open{
+    transform:translateX(0vw);
+    }
+  .wrapper.close{
+    transform:translateX(-20vw);
+    }
+
+
+  }
+ @media only screen and (min-width: 800px) {
+
+  .wrapper{
+    transform:translateX(0vw);
+    }
+
+  .wrapper.open{
+    transform:translateX(0vw);
+    }
+
+  .wrapper.close{
+    transform:translateX(-20vw);
+    }
+ 
+  }
+  

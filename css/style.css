@@ -146,7 +146,7 @@ background: #333;
 
 .mapSection{
   background: #666;
-  height: 98vh;
+  height: 100vh;
   width: 100vw;
  left:20vw;
  position: absolute;
@@ -157,7 +157,7 @@ background: #333;
 }
 
 .mapMain{
-height: 98vh;
+height: 100vh;
 width: 100vw;
 float: right;
 float top;
@@ -171,15 +171,114 @@ z-index: 0;
  @media only screen and (max-width: 800px) {
 
   .wrapper{
-    transform:translateX(-20vw);
+    transform:translateX(-30vw);
     }
 
   .wrapper.open{
     transform:translateX(0vw);
     }
   .wrapper.close{
-    transform:translateX(-20vw);
+    transform:translateX(-30vw);
     }
+
+.sidebar-menu.open{
+  
+  transform:translateX(35vw);
+}
+.control{
+  color: white;
+  padding: 5px;
+  font-weight: 100;
+  font-family: 'Open Sans';
+  font-size: 8px;
+ background: #333;
+ height: 10vh;
+ width:20vw;
+}
+
+
+.Zip-label{
+
+  color: white;
+  padding: 1px;
+  font-size: 10px;
+}
+
+.Filter-label{
+  color: white;
+padding: 1px;
+font-size: 10px;
+}
+
+.filter{
+  color: black;
+  padding: 5px;
+ font-weight: 100;
+  font-family: 'Open Sans';
+  font-size: 8px;
+background: #333; 
+height: 10vh;
+}
+
+.sidebar-menu{
+  position: fixed;
+  width: 20vw;
+  min-width: 100px;
+  margin-left: 0px;
+  height: 100%;
+  max-height: 100vh;
+  background-color: #333;
+  opacity: 0.9;
+  transition:all 0.3s ease-in-out;
+  transform:translateX(0vw);
+  transition:transform 0.6s ease;
+}
+
+.nav-item{
+  
+  font-weight: 100;
+  font-family: 'Open Sans';
+  font-size: 12px;
+  color:white;
+  padding: 2px 2px 2px 2px ;
+  box-sizing: border-box;
+  border: solid 1px #D8D8D8;
+  transition:all 0.3s ease-in-out;  
+  cursor: pointer;
+  text-align: left;
+}
+.mapSection{
+  background: #666;
+  height: 100vh;
+  width: 100vw;
+ left:20vw;
+ position: absolute;
+}
+.nav-toggle-btn{
+  position: fixed;
+  padding: 0.1em 0.1em 0.1em 0.4em;
+  color: white;
+  cursor: pointer;
+  background-color: #999;
+  font-size: 1.8em;
+  min-width:40px;
+  min-height:40px;
+
+  position: absolute;
+  z-index: 1;
+
+}
+
+.nav-close-btn{
+  right:1.2em;
+  top: 0.1em;
+  opacity: 0.7;
+  cursor: pointer;
+  color: white;
+  transition:all 0.3s ease-in-out;
+  position: absolute;  
+  
+}
 
 
   }

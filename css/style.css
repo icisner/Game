@@ -40,7 +40,7 @@
 
 .sidebar-menu.open{
   
-  transform:translateX(25vw);
+  transform:translateX(35vw);
 }
 
 .nav-close-btn{
@@ -91,6 +91,7 @@ font-size: 16px;
 background: #333; 
 height: 10vh;
 }
+
 .nav-list-container{
 overflow-y:auto; 
 height: 78vh;
@@ -136,7 +137,7 @@ background: #333;
 }
 
 .wrapper.close{
- transform:translateX(-20vw);
+ transform:translateX(-25vw);
 }
 
 
@@ -146,9 +147,9 @@ background: #333;
 
 .mapSection{
   background: #666;
-  height: 100vh;
-  width: 100vw;
- left:20vw;
+  height: 100%;
+  width: 100%;
+ left:20vw; 
  position: absolute;
 }
 
@@ -168,23 +169,27 @@ z-index: 0;
 }
       /* If there is enough space (> 600px), we keep the drawer open all the time. */
 
- @media only screen and (max-width: 800px) {
+ @media only screen and (max-width: 600px) {
 
-  .wrapper{
-    transform:translateX(-30vw);
-    }
+
+
+.wrapper{
+  transform:translateX(-25vw);
+    transition:transform 0.6s ease;
+}
 
   .wrapper.open{
-    transform:translateX(0vw);
+    transform:translateX(0px);
     }
   .wrapper.close{
-    transform:translateX(-30vw);
+    transform:translateX(-25vw);
     }
 
 .sidebar-menu.open{
   
   transform:translateX(35vw);
 }
+
 .control{
   color: white;
   padding: 5px;
@@ -193,7 +198,7 @@ z-index: 0;
   font-size: 8px;
  background: #333;
  height: 10vh;
- width:20vw;
+ width:25vw;
 }
 
 
@@ -251,7 +256,7 @@ height: 10vh;
   background: #666;
   height: 100vh;
   width: 100vw;
- left:20vw;
+ left:25vw;
  position: absolute;
 }
 .nav-toggle-btn{
@@ -270,7 +275,7 @@ height: 10vh;
 }
 
 .nav-close-btn{
-  right:1.2em;
+  right:0.8em;
   top: 0.1em;
   opacity: 0.7;
   cursor: pointer;

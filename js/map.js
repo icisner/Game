@@ -13,7 +13,7 @@
             lat: 29.5,
             lng: -98.5
           },
-          zoom: 14,
+          zoom: 12,
           mapTypeControl: true,
           mapTypeControlOptions: {
               style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,

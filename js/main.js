@@ -1,4 +1,8 @@
 
+/* ---------------------------------------------------
+     Setting up global variables to handle 
+     main list objects
+--------------------------------------------------------*/
 
 function ObjRes(name, addr, Y, X){
 	this.name=ko.observable(name);
@@ -8,41 +12,58 @@ function ObjRes(name, addr, Y, X){
   this.isSelected=ko.observable(true);
 }
 
+/* ---------------------------------------------------
+     Setting View Model 
+--------------------------------------------------------*/
 function AppViewModel() {
 
 	var self=this;
-	
 	this.ZipCode = ko.observable("");
-	/*this.flagZip=ko.observable(false);*/
   this.sQuery=ko.observable("");
   this.sFilterList = ko.observable("");
   this.ResArray=ko.observableArray([]);
   this.vFilterArray=ko.observableArray([]);
 
+/* ---------------------------------------------------
+     getting lat long for items in the list 
+--------------------------------------------------------*/
 	this.disZipCode=function(){
-		console.log(this.ZipCode());
+		//console.log(this.ZipCode());
     geocodeAddress(this.ZipCode());
 	}; 
-
+/* ---------------------------------------------------
+    function to create obj list for locations found
+--------------------------------------------------------*/
    this.AddRes = function(name, addr, Y, X){
    		this.ResArray.push(new ObjRes(name, addr, Y, X));
    };
 
-        self.fCleared = function(){
-        self.vFilterArray(self.ResArray());  
-        fClearMarkers();      
-      };
+/* ---------------------------------------------------
+     Function to clear array
+--------------------------------------------------------*/
 
+   self.fCleared = function(){
+     self.vFilterArray(self.ResArray());  
+        fClearMarkers();      
+    };
+
+/* ---------------------------------------------------
+     Function to open info windows
+--------------------------------------------------------*/
        self.oMarkerInfo = function(data, item){ 
         openWindowMarker(this);     
       };
   
-
+/* ---------------------------------------------------
+     Function to delte elements from array
+--------------------------------------------------------*/
   self.fCleanArray = function(){
     self.ResArray([]);
     self.vFilterArray([]);
   }
-
+/* ---------------------------------------------------
+     Function to filter array list
+--------------------------------------------------------*/
    self.sSearch= function() {
     var txt=this.sQuery();
       self.vFilterArray([]);
@@ -57,6 +78,9 @@ function AppViewModel() {
            filterMarkers(self.vFilterArray); 
       };
 }
+/* ---------------------------------------------------
+   creatung new Application Model
+--------------------------------------------------------*/
 
 var vm = new AppViewModel();
 ko.options.useOnlyNativeEvents = true;

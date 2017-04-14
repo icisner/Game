@@ -1,4 +1,6 @@
-
+/* ---------------------------------------------------
+     Setting up global variables to handle map
+--------------------------------------------------------*/
       var map;
       var geocoder;
       var markers = [];
@@ -6,6 +8,11 @@
       var infowindow;
       var contentString;
       
+/*---------------------------------------------------------
+      Function to initalize map function
+      setting initial coordinates lat long
+      zoom level and other mapping options
+----------------------------------------------------------*/
  function initMap() {
     var searchArea;
     var options ={
@@ -13,7 +20,7 @@
             lat: 29.5,
             lng: -98.5
           },
-          zoom: 14,
+          zoom: 13,
           mapTypeControl: true,
           mapTypeControlOptions: {
               style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
@@ -26,17 +33,16 @@
           maxZoom: 20,
           minZoom: 8,
           mapTypeId: 'terrain' //hybrid
-
         }
-
         searchArea = {lat: options.center.lat, lng: options.center.lng };
         map = new google.maps.Map(document.getElementById('map'), options);
         geocoder = new google.maps.Geocoder();
         fsearchPoint(searchArea);
-      
-
      }
 
+/* ---------------------------------------------------
+     Function to search new location in the map 
+--------------------------------------------------------*/
 function fsearchPoint(sSearchArea){
        var service = new google.maps.places.PlacesService(map);
         service.textSearch({
@@ -45,26 +51,27 @@ function fsearchPoint(sSearchArea){
           type: ['restaurant']
         }, callback);
       }
-
+/* ---------------------------------------------------
+     Function to get lat long for address in the array
+--------------------------------------------------------*/
 function geocodeAddress(address) {
         var address1 = address+',USA';
         
         geocoder.geocode({'address': address1}, function(results, status) {
           if (status === 'OK') {
            
-
             map.setCenter(results[0].geometry.location);
             fClearMarkersMapAll();
             vm.fCleanArray();
             fsearchPoint(results[0].geometry.location);
-
-
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
         });
       }
-
+/* ---------------------------------------------------
+     Function to delete markers from map
+--------------------------------------------------------*/
  function fClearMarkersMapAll() {
     var cMap;
       cMap=null;
@@ -74,7 +81,9 @@ function geocodeAddress(address) {
         markers=[];
       }
 
-
+/* ---------------------------------------------------
+     Function to be used after AJAX response
+--------------------------------------------------------*/
       function callback(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           
@@ -88,7 +97,9 @@ function geocodeAddress(address) {
           }
           vm.vFilterArray(vm.ResArray());
         }
-
+/* ---------------------------------------------------
+     Function to create markers base in lat and long
+--------------------------------------------------------*/
       function createMarker(place) {
         var indx;
         var placeLoc = place.geometry.location;
@@ -115,7 +126,9 @@ function geocodeAddress(address) {
                } 
           });
         } 
-
+/* ---------------------------------------------------
+     Function to add infromation in marker
+--------------------------------------------------------*/
   function openWindowMarker(opts){
 
           for (var i=0; i < markers.length; i++){
@@ -132,7 +145,9 @@ function geocodeAddress(address) {
                 }  
             }       
       }
-
+/* ---------------------------------------------------
+     Function to filter list
+--------------------------------------------------------*/
    function filterMarkers(opts){
       
         for (var i=0; i < markers.length;i++){
@@ -148,7 +163,9 @@ function geocodeAddress(address) {
             } 
         }
        }
-
+/* ---------------------------------------------------
+     Function to hide markers from map
+--------------------------------------------------------*/
    function fClearMarkers(){
       
         for (var i=0; i < markers.length;i++){
@@ -156,7 +173,9 @@ function geocodeAddress(address) {
         }
 
        }
-  
+  /* ---------------------------------------------------
+     Function to format marker label
+--------------------------------------------------------*/
     function uPdateLabel(data){
             contentString ='<div id="content">'+
               '<div id="siteNotice"></div>'+
@@ -174,7 +193,9 @@ function geocodeAddress(address) {
 
         return contentString; 
       }
-
+/* ---------------------------------------------------
+     Function to send AJAX request
+--------------------------------------------------------*/
    function requestAjax(opts) {
     var yelp_url = 'https://api.yelp.com/v2/search'
 

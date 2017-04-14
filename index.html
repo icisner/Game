@@ -5,24 +5,29 @@
 	<title>Local Restauranrs</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
-
 	 <script language="javascript" type="text/javascript" src="ko/knockout-3.4.0.js"></script>
 	 <script src="ko/komapping-2.4.1.js"></script>
 	 <script src="js/jquery-1.12.4.min.js"></script>
 	 <script src="js/jquery-ui.min.js"></script>
 	 <script src="js/oauth-signature.js"></script>
 
-	 <meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	 
+	<!-- _________________________________________________
+
+		Setting view port to match device width   
+	_______________________________________________________-->
+
+	 <meta name="viewport" content="width=device-width, initial-scale=1">		 
   </head>
-  <style>
-    #draggable { width: 150px; height: 150px; padding: 0.5em; } 
-  </style>
-     <div class="outer-wrapper">
+
+   <div class="body">
         <div class="wrapper">
-            <!-- <span style="font-size:30px;cursor:pointer" href="#" class="nav-toggle-btn">☰</span> -->
-	  		<div id="sideNav" class="sidebar-menu">
+     		<div id="sideNav" class="sidebar-menu">
+	  			
+				<!-- _________________________________________________
+
+						Setting close button and search boxes   
+				_______________________________________________________-->
+
 	  			<p class="nav-close-btn"> &#x2716;</p>
 				<div class="control">
 					<h2>Local Restaurants</h2>
@@ -30,6 +35,10 @@
 					<input data-bind="value:ZipCode">
 						<button data-bind="click:disZipCode">Search</button>
 				</div>
+				<!-- _________________________________________________
+
+						Setting function to search address and filter   
+				_______________________________________________________-->
 
 				<div class = "filter">
 					<p class="Filter-label">Filter</p>
@@ -38,12 +47,16 @@
 					<p>
 					</p>
 				</div>
+				<!-- _________________________________________________
+
+						Setting list container
+				_______________________________________________________-->
+
 				<div class="nav-list-container">
 					<div class="nav-list">
 						<ul class="nav-items" data-bind="foreach: vFilterArray">
 							<li class="nav-item" data-bind = "click: $parent.oMarkerInfo"><a class="nav-idv-item" href='#'><span data-bind="text: name"></span></a> 
-					<!-- <li data-bind = "click: $parent.oMarkerInfo.bind($data,$index())"><a class="sList1" href='#'><span data-bind="text: name , event { click: $parent.oMarkerInfo }"></span></a> -->        
-        					</li>
+	     					</li>
          					<br>
  						</ul>		
 					</div>
@@ -52,7 +65,13 @@
 				    
 			<main id="MapSection" class="mapSection">
 		  		<div id="sContent" class="mapContent">
-		 			<span style="font-size:30px;cursor:pointer" href="#" class="nav-toggle-btn">☰</span> 
+
+		  			<!-- _________________________________________________
+
+						Setting button to open nav slider   
+					_______________________________________________________-->
+
+		 			<span style="font-size:30px;cursor:pointer" href="#" class="nav-toggle-btn">&#9776</span> 
 		 			<div id="map" class="mapMain"></div>
 		 		</div>	
 			</main>
@@ -63,10 +82,10 @@
 <script language="javascript" type="text/javascript" src="js/map.js"> </script> 
 <script> 
 
+/* -- Modifing Class when click on hamburger button --- */
 
 $(function(){
     $('.nav-toggle-btn').on('click',function(){
-        /*$('.sidebar-menu').toggleClass('open');*/
         if ($('.wrapper').hasClass('close')) {
 			$('.wrapper').removeClass('close');
           }
@@ -76,7 +95,6 @@ $(function(){
     });
     
     $('.nav-close-btn').on('click',function(){
-        /*$('.sidebar-menu').toggleClass('open');*/
         if($('.wrapper').hasClass('open')) {
         	$('.wrapper').removeClass('open');
        		}

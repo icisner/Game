@@ -1,4 +1,4 @@
-frontend-nanodegree-arcade-game
+Project Neighborhood Map
 ===============================
 
 1.- To run this game you can open index.html 

@@ -1,0 +1,279 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+*{
+  margin:0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+.nav-toggle-btn{
+  position: fixed;
+  padding: 15px 20px;
+  color: white;
+  cursor: pointer;
+  background-color: #999;
+  font-size: 2em;
+  position: absolute;
+  z-index: 1;
+
+}
+
+.sidebar-menu{
+  position: fixed;
+  width: 20vw;
+  min-width: 100px;
+  margin-left: 0px;
+  height: 100%;
+  max-height: 100vh;
+  background-color: #333;
+  opacity: 0.9;
+  transition:all 0.3s ease-in-out;
+  transform:translateX(0vw);
+  transition:transform 0.6s ease;
+}
+
+.sidebar-menu.open{
+  
+  transform:translateX(35vw);
+}
+
+.nav-close-btn{
+  right: 10px;
+  top: 10px;
+  opacity: 0.7;
+  cursor: pointer;
+  color: white;
+  transition:all 0.3s ease-in-out;
+  position: absolute;  
+  
+}
+
+.nav-close-btn:hover{
+  opacity: 1;
+}
+
+
+.control{
+  color: white;
+  padding: 5px;
+  font-weight: 100;
+  font-family: 'Open Sans';
+  font-size: 14px;
+ background: #333;
+ height: 10vh;
+}
+
+.Zip-label{
+
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.Filter-label{
+  color: white;
+padding: 10px;
+font-size: 16px;
+}
+
+.filter{
+  color: black;
+  padding: 5px;
+ font-weight: 100;
+  font-family: 'Open Sans';
+  font-size: 18px;
+background: #333; 
+height: 10vh;
+}
+
+.nav-list-container{
+overflow-y:auto; 
+height: 78vh;
+background: #333;
+
+}
+
+.nav-items{
+  margin-top: 0px;
+  /*display: block;*/
+  width: 100%;
+}
+
+.nav-item{
+  
+  font-weight: 100;
+  font-family: 'Open Sans';
+  font-size: 20px;
+  color:white;
+  padding: 8px 2px 8px 8px ;
+  box-sizing: border-box;
+  border: solid 1px #D8D8D8;
+  transition:all 0.3s ease-in-out;  
+  cursor: pointer;
+  text-align: left;
+}
+.nav-idv-item{
+  color:white;
+}
+.nav-item:hover{
+  background: #024b9d;
+}
+.wrapper{
+  transform:translateX(0vw);
+    transition:transform 0.6s ease;
+}
+.wrapper.open{
+ transform:translateX(0vw);
+}
+.wrapper.close{
+ transform:translateX(-25vw);
+}
+.mapSection{
+  background: #666;
+  height: 100%;
+  width: 100%;
+ left:20vw; 
+ position: absolute;
+}
+
+.mapMain{
+height: 100vh;
+width: 100vw;
+float: right;
+float top;
+position: absolute;
+margin-left: 0vw;
+z-index: 0;
+
+}
+ 
+/* If there is enough space (> 600px), we keep the drawer open all the time. */
+
+ @media only screen and (max-width: 600px) {
+
+.wrapper{
+  transform:translateX(-25vw);
+    transition:transform 0.6s ease;
+}
+  .wrapper.open{
+    transform:translateX(0px);
+    }
+  .wrapper.close{
+    transform:translateX(-25vw);
+    }
+
+.sidebar-menu.open{
+  
+  transform:translateX(35vw);
+}
+
+.control{
+  color: white;
+  padding: 5px;
+  font-weight: 100;
+  font-family: 'Open Sans';
+  font-size: 8px;
+ background: #333;
+ height: 10vh;
+ width:25vw;
+}
+
+.Zip-label{
+  color: white;
+  padding: 1px;
+  font-size: 10px;
+}
+
+.Filter-label{
+  color: white;
+padding: 1px;
+font-size: 10px;
+}
+
+.filter{
+  color: black;
+  padding: 5px;
+ font-weight: 100;
+  font-family: 'Open Sans';
+  font-size: 8px;
+background: #333; 
+height: 10vh;
+}
+
+.sidebar-menu{
+  position: fixed;
+  width: 20vw;
+  min-width: 100px;
+  margin-left: 0px;
+  height: 100%;
+  max-height: 100vh;
+  background-color: #333;
+  opacity: 0.9;
+  transition:all 0.3s ease-in-out;
+  transform:translateX(0vw);
+  transition:transform 0.6s ease;
+}
+
+.nav-item{
+  
+  font-weight: 100;
+  font-family: 'Open Sans';
+  font-size: 12px;
+  color:white;
+  padding: 2px 2px 2px 2px ;
+  box-sizing: border-box;
+  border: solid 1px #D8D8D8;
+  transition:all 0.3s ease-in-out;  
+  cursor: pointer;
+  text-align: left;
+}
+.mapSection{
+  background: #666;
+  height: 100vh;
+  width: 100vw;
+ left:25vw;
+ position: absolute;
+}
+.nav-toggle-btn{
+  position: fixed;
+  padding: 0.1em 0.1em 0.1em 0.4em;
+  color: white;
+  cursor: pointer;
+  background-color: #999;
+  font-size: 1.8em;
+  min-width:40px;
+  min-height:40px;
+  position: absolute;
+  z-index: 1;
+}
+
+.nav-close-btn{
+  right:0.8em;
+  top: 0.1em;
+  opacity: 0.7;
+  cursor: pointer;
+  color: white;
+  transition:all 0.3s ease-in-out;
+  position: absolute;  
+  
+}
+
+}
+
+/* If screen is wider of 800px keep the drawer open */
+
+ @media only screen and (min-width: 800px) {
+  .wrapper{
+    transform:translateX(0vw);
+    }
+
+  .wrapper.open{
+    transform:translateX(0vw);
+    }
+
+  .wrapper.close{
+    transform:translateX(-20vw);
+    }
+ 
+  }
+  

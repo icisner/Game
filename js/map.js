@@ -25,6 +25,15 @@
           mapTypeControlOptions: {
               style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
               position: google.maps.ControlPosition.TOP_CENTER
+           },
+            zoomControl: true,
+            zoomControlOptions: {
+            position: google.maps.ControlPosition.LEFT_BOTTOM
+          },
+            scaleControl: true,
+            streetViewControl: true,
+            streetViewControlOptions: {
+            position: google.maps.ControlPosition.LEFT_BOTTOM
           },
           visible: true,
           disableDefaultUI : false,
@@ -105,7 +114,8 @@ function geocodeAddress(address) {
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
           map: map,
-          position: place.geometry.location
+          position: place.geometry.location,
+          icon:'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
         });
 
         marker.sYelp=0;
@@ -115,6 +125,16 @@ function geocodeAddress(address) {
         markers[indx].ind=indx;
         place.ind=indx;
         google.maps.event.addListener(marker, 'click', function() {
+
+          if (markers[indx].getAnimation() !== null) {
+              
+                markers[indx].setAnimation(google.maps.Animation.BOUNCE);
+                markers[indx].setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+              
+              } else {
+                 markers[indx].setAnimation(null);
+                 markers[indx].setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+              }
           if (markers[indx].sYelp === 1){             
 
                  infowindows[indx].content=markers[indx].sYelpContent;
@@ -132,8 +152,18 @@ function geocodeAddress(address) {
   function openWindowMarker(opts){
 
           for (var i=0; i < markers.length; i++){
+
               if (markers[i].name==opts.name()){
                 var data={name: opts.name(), formatted_address: opts.addr(), ind: i};
+                  if (markers[i].getAnimation() !== null) {
+                      markers[i].setAnimation(google.maps.Animation.BOUNCE)
+                      markers[i].setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+                      
+                    } else {
+                      markers[i].setAnimation(null);
+                      markers[i].setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+                      
+                    }
                  if (markers[i].sYelp === 1){
                        infowindows[i].content=markers[i].sYelpContent;
                        infowindows[i].setContent(infowindows[i].content);
@@ -141,7 +171,7 @@ function geocodeAddress(address) {
                     }
                  else {
                         requestAjax(data); 
-                    }  
+                    } 
                 }  
             }       
       }

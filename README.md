@@ -11,7 +11,7 @@ The map and markers are created using **Google Map API** additional when you cli
 
 ![](https://github.com/icisner/icisner.github.io/blob/master/img/Info_marker1.PNG)
 
-If no information is found in the **Yelp** then this label would be display
+If no information is found in the **Yelp** then this label would be displayed
 
 ![](https://github.com/icisner/icisner.github.io/blob/master/img/Info_marker2.PNG)
 

@@ -43,7 +43,7 @@ screen
 
 ## Files
 
-- `README.md`: infromation abou this application
+- `README.md`: information abou this application
 - `ko/knockout-3.4.0.js`: Knockout library file
 - `ko/komapping-2.4.1.js`: Knockout library file
 - `js/jquery-1.12.4.min.js`: JQuery library file

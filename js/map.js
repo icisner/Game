@@ -35,6 +35,7 @@
             streetViewControlOptions: {
             position: google.maps.ControlPosition.LEFT_BOTTOM
           },
+          
           visible: true,
           disableDefaultUI : false,
           scrollwheel : true,
@@ -250,6 +251,7 @@ function geocodeAddress(address) {
     data: yelp_parameters,
     cache: true,
     dataType: 'jsonp',
+
     success:function(data) {  
         markers[opts.ind].setMap(map);
         markers[opts.ind].sYelp=1;
@@ -266,6 +268,7 @@ function geocodeAddress(address) {
         infowindows[opts.ind].open(map,markers[opts.ind]);
 
       },
+
       fail: function(data) {
         markers[opts.ind].setMap(map);
         infowindows[opts.ind].content="No Results found in Yelp";

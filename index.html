@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+ <head>
 	<title>Local Restauranrs</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
@@ -17,99 +17,50 @@
 	_______________________________________________________-->
 
 	 <meta name="viewport" content="width=device-width, initial-scale=1">		 
-  </head>
 
-   <div class="body">
-        <div class="wrapper">
-     		<div id="sideNav" class="sidebar-menu">
-	  			
-				<!-- _________________________________________________
+	</head>
 
-						Setting close button and search boxes   
-				_______________________________________________________-->
+<body>
 
-	  			<p class="nav-close-btn"> &#x2716;</p>
-				<div class="control">
-					<h2>Local Restaurants</h2>
-					<p class="Zip-label">Enter Address</p>
-					<input data-bind="value:ZipCode">
-						<button data-bind="click:disZipCode">Search</button>
-				</div>
-				<!-- _________________________________________________
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="control">
+		<h3>Local Restaurants</h3>
+		<p class="Zip-label">Enter Address</p>
+		<input class="inpt" data-bind="value:ZipCode">
+		<p></p>
+		<button class="btn" data-bind="click:disZipCode">Search</button>
+	</div>
+	<p></p>
 
-						Setting function to search address and filter   
-				_______________________________________________________-->
+	<div class = "control">
+		<p class="Filter-label">Filter</p>
+		<input class="inpt" placeholder="Search..." type="search" name="q" data-bind="value: sQuery, event: { input: fCleared }">
+		<p></p>
+		<button class="btn" type="button" data-bind="click:sSearch">Filter</button>
+		<p></p>
+	</div> 
+	<div class="nav-list">
+		<ul class="nav-items" data-bind="foreach: vFilterArray">
+			<li class="nav-item" data-bind = "click: $parent.oMarkerInfo">
+				<a class="nav-idv-item" href='#'>
+					<span data-bind="text: name"></span>
+				</a> 
+			</li>
+    		<br>
+ 		</ul> 
+ 	</div>
+	</div>
+	
+	<span style="font-size:30px;cursor:pointer;background-color:white;padding:4px 4px 4px 4px;" onclick="openNav()">&#9776;</span>
+	<div id="map" class="mapMain">
+	</div>
+	
+	<script language="javascript" type="text/javascript" src="js/main.js"></script> 
+	<script language="javascript" type="text/javascript" src="js/map.js"> </script>
 
-				<div class = "filter">
-					<p class="Filter-label">Filter</p>
-					<input placeholder="Search..." type="search" name="q" data-bind="value: sQuery, event: { input: fCleared }">
-					<button type="button" data-bind="click:sSearch">Filter</button>
-					<p>
-					</p>
-				</div>
-				<!-- _________________________________________________
-
-						Setting list container
-				_______________________________________________________-->
-
-				<div class="nav-list-container">
-					<div class="nav-list">
-						<ul class="nav-items" data-bind="foreach: vFilterArray">
-							<li class="nav-item" data-bind = "click: $parent.oMarkerInfo"><a class="nav-idv-item" href='#'><span data-bind="text: name"></span></a> 
-	     					</li>
-         					<br>
- 						</ul>		
-					</div>
-				</div>	
-			</div>	
-				    
-			<main id="MapSection" class="mapSection">
-		  		<div id="sContent" class="mapContent">
-
-		  			<!-- _________________________________________________
-
-						Setting button to open nav slider   
-					_______________________________________________________-->
-
-		 			<span style="font-size:30px;cursor:pointer" href="#" class="nav-toggle-btn">&#9776</span> 
-		 			<div id="map" class="mapMain"></div>
-		 		</div>	
-			</main>
-		</div>
-	</div>			 
-
-<script language="javascript" type="text/javascript" src="js/main.js"></script>
-<script language="javascript" type="text/javascript" src="js/map.js"> </script> 
-<script> 
-
-/* -- Modifing Class when click on hamburger button --- */
-
-$(function(){
-    $('.nav-toggle-btn').on('click',function(){
-        if ($('.wrapper').hasClass('close')) {
-			$('.wrapper').removeClass('close');
-          }
-         
-		$('.wrapper').addClass('open');
-
-    });
-    
-    $('.nav-close-btn').on('click',function(){
-        if($('.wrapper').hasClass('open')) {
-        	$('.wrapper').removeClass('open');
-       		}
-        	$('.wrapper').addClass('close');       	
-    });
-});
-
-	initMap;
-
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBf_LgqHPFPxbBUk4Cv4AUaexm56EgyS8&libraries=places&callback=initMap"
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBf_LgqHPFPxbBUk4Cv4AUaexm56EgyS8&libraries=places&callback=initMap"
         async defer>
-    </script>
-  </body>
-</html>
-
-
+        initMap;
+    </script> 
+</body>

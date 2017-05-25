@@ -7,6 +7,7 @@
       var infowindows=[];
       var infowindow;
       var contentString;
+      var nTimer;
       
 /*---------------------------------------------------------
       Function to initalize map function
@@ -204,6 +205,28 @@ function geocodeAddress(address) {
         }
 
        }
+
+/* ---------------------------------------------------
+     Function to handle AJAX timeout 
+--------------------------------------------------------*/
+
+  function endTimer(opt){
+
+        clearTimeout(nTimer);
+        markers[opt].setMap(map);
+        infowindows[opt].content="No AJAX response from Yelp";
+        infowindows[opt].setContent(infowindows[opt].content);
+        infowindows[opt].open(map,markers[opt]);               
+  }
+
+/* ---------------------------------------------------
+     Function to start timer for AJAX request
+--------------------------------------------------------*/
+  function starTimer(secs,opt){
+    nTimer = setTimeout('endTimer('+opt+')',secs);
+
+  }
+
   /* ---------------------------------------------------
      Function to format marker label
 --------------------------------------------------------*/
@@ -246,15 +269,23 @@ function geocodeAddress(address) {
     var encodedSignature = oauthSignature.generate('GET', yelp_url, yelp_parameters,'DfGsVrz5heaDRked3LLxDqBxuEA','8w3rdVUYDrSWt2kBQUrC-jXpIE8');            //CONSUMER_SECRET_KEY,TOKEN_SECRET_KEY );
     yelp_parameters.oauth_signature = encodedSignature;
 
+
+    starTimer(10000,opts.ind);
+
+
    $.ajax({
     url: yelp_url,
     data: yelp_parameters,
     cache: true,
     dataType: 'jsonp',
 
+/* ---------------------------------------------------
+     Function to handle AJAX response
+--------------------------------------------------------*/
     success:function(data) {  
         markers[opts.ind].setMap(map);
         markers[opts.ind].sYelp=1;
+        clearTimeout(nTimer);
 
       if (data.businesses.length > 0 ){
 
@@ -269,12 +300,17 @@ function geocodeAddress(address) {
 
       },
 
+/* ---------------------------------------------------
+     Function to handle AJAX fail response
+--------------------------------------------------------*/
+
       fail: function(data) {
+        clearTimeout(nTimer);
         markers[opts.ind].setMap(map);
         infowindows[opts.ind].content="No Results found in Yelp";
         infowindows[opts.ind].setContent(infowindows[opts.ind].content);
         infowindows[opts.ind].open(map,markers[opts.ind]);        
-        console.log('No results found!');
+      
         }
       });
   }

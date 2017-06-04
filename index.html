@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html>
-
  <head>
 	<title>Local Restauranrs</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
-	 <script language="javascript" type="text/javascript" src="ko/knockout-3.4.0.js"></script>
-	 <script src="ko/komapping-2.4.1.js"></script>
-	 <script src="js/jquery-1.12.4.min.js"></script>
-	 <script src="js/jquery-ui.min.js"></script>
-	 <script src="js/oauth-signature.js"></script>
+	<link rel="stylesheet"  href="css/style.css">
+	<link rel="stylesheet"  href="css/jquery-ui.min.css">
 
 	<!-- _________________________________________________
 
@@ -20,10 +14,10 @@
 
 	</head>
 
-<body>
+  <body>
 
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div id="mySidenav" class="sidenav" data-bind="css: {'sidenavOpen': sideNavStatus}">
+  	<a data-bind="click : fcloseNav" class="closebtn" >&times;</a>
   <div class="control">
 		<h3>Local Restaurants</h3>
 		<p class="Zip-label">Enter Address</p>
@@ -35,9 +29,7 @@
 
 	<div class = "control">
 		<p class="Filter-label">Filter</p>
-		<input class="inpt" placeholder="Search..." type="search" name="q" data-bind="value: sQuery, event: { input: fCleared }">
-		<p></p>
-		<button class="btn" type="button" data-bind="click:sSearch">Filter</button>
+		<input class="inpt" placeholder="Search..." type="search" name="q" data-bind="value: sQuery, valueUpdate: 'keyup', event: { input: fCleared }" autocomplete="off">
 		<p></p>
 	</div> 
 	<div class="nav-list">
@@ -52,15 +44,16 @@
  	</div>
 	</div>
 	
-	<span style="font-size:30px;cursor:pointer;background-color:white;padding:4px 4px 4px 4px;" onclick="openNav()">&#9776;</span>
+	<span style="font-size:30px;cursor:pointer;background-color:white;padding:4px 4px 4px 4px;" data-bind= "click :fopenNav">&#9776;</span>
 	<div id="map" class="mapMain">
 	</div>
-	
-	<script language="javascript" type="text/javascript" src="js/main.js"></script> 
-	<script language="javascript" type="text/javascript" src="js/map.js"> </script>
-
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBf_LgqHPFPxbBUk4Cv4AUaexm56EgyS8&libraries=places&callback=initMap"
-        async defer>
-        initMap;
-    </script> 
+	 <script src="ko/knockout-3.4.0.js"></script>
+	 <script src="ko/komapping-2.4.1.js"></script>
+	 <script src="js/jquery-3.2.1.min.js"></script>
+	 <script src="js/jquery-ui.min.js"></script>
+	 <script src="js/oauth-signature.js"></script>
+	 <script src="js/main.js"></script> 
+	 <script src="js/map.js"> </script>
+  	 <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap" onerror= "googleError()">
+  	 </script> 
 </body>

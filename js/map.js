@@ -1,14 +1,23 @@
 /* ---------------------------------------------------
      Setting up global variables to handle map
 --------------------------------------------------------*/
-      var map;
-      var geocoder;
-      var markers = [];
-      var infowindows=[];
-      var infowindow;
-      var contentString;
-      var nTimer;
-      
+      var map;                        // global Map canvas variable
+      var geocoder;                   // global geocoder variable 
+      var markers = [];               // global vector to handle markers
+      var infowindowsTxt=[];          // global variable to hold marker information and not to have to query multiple times
+      var infowindowBox;              // global variable to show information for markers and it is being reused
+      var contentString;              // global variable to handle contect to be use in infowindow marker 
+
+/* ---------------------------------------------------
+     function to handle google map API errors
+--------------------------------------------------------*/
+     
+ function googleError(e){
+
+    alert("Error loading Google API ....");
+
+ }
+
 /*---------------------------------------------------------
       Function to initalize map function
       setting initial coordinates lat long
@@ -18,8 +27,8 @@
     var searchArea;
     var options ={
           center: {
-            lat: 29.5,
-            lng: -98.5
+            lat: 29.5,    
+            lng: -98.50  
           },
           zoom: 13,
           mapTypeControl: true,
@@ -29,12 +38,12 @@
            },
             zoomControl: true,
             zoomControlOptions: {
-            position: google.maps.ControlPosition.LEFT_BOTTOM
+            position: google.maps.ControlPosition.RIGHT_BOTTOM
           },
             scaleControl: true,
             streetViewControl: true,
             streetViewControlOptions: {
-            position: google.maps.ControlPosition.LEFT_BOTTOM
+            position: google.maps.ControlPosition.RIGHT_BOTTOM
           },
           
           visible: true,
@@ -43,7 +52,7 @@
           draggable: true,
           maxZoom: 20,
           minZoom: 8,
-          mapTypeId: 'terrain' //hybrid
+          mapTypeId: 'terrain'
         }
         searchArea = {lat: options.center.lat, lng: options.center.lng };
         map = new google.maps.Map(document.getElementById('map'), options);
@@ -53,17 +62,19 @@
 
 /* ---------------------------------------------------
      Function to search new location in the map 
+      in radius 2km and looking from Reastaurants
 --------------------------------------------------------*/
 function fsearchPoint(sSearchArea){
        var service = new google.maps.places.PlacesService(map);
         service.textSearch({
           location: sSearchArea,
-          radius: 2000,
+          radius: 2000,  
           type: ['restaurant']
         }, callback);
       }
 /* ---------------------------------------------------
      Function to get lat long for address in the array
+
 --------------------------------------------------------*/
 function geocodeAddress(address) {
         var address1 = address+',USA';
@@ -84,25 +95,26 @@ function geocodeAddress(address) {
      Function to delete markers from map
 --------------------------------------------------------*/
  function fClearMarkersMapAll() {
-    var cMap;
+    var cMap,i;
       cMap=null;
-        for (var i = 0; i < markers.length; i++) {
+        for (i = 0; i < markers.length; i++) {
           markers[i].setMap(cMap);
         }
         markers=[];
       }
 
 /* ---------------------------------------------------
-     Function to be used after AJAX response
+     Function to be used after google.maps.places.PlacesService(map) request
+     from  function fsearchPoint
 --------------------------------------------------------*/
       function callback(results, status) {
+        var i;
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           
-          for (var i = 0; i < results.length; i++) {
+          for (i = 0; i < results.length; i++) {
             
               vm.AddRes(results[i].name,results[i].formatted_address,results[i].geometry.location.lat(),results[i].geometry.location.lng());
-              infowindow = new google.maps.InfoWindow();
-              infowindows.push(infowindow);
+              infowindowBox = new google.maps.InfoWindow();
               createMarker(results[i]);
             }
           }
@@ -120,6 +132,8 @@ function geocodeAddress(address) {
           icon:'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
         });
 
+        // using sYelp variable to control if ajax request is requiered to get more infro from YELP API 
+
         marker.sYelp=0;
         marker.name=place.name;
         markers.push(marker);
@@ -131,17 +145,14 @@ function geocodeAddress(address) {
           if (markers[indx].getAnimation() !== null) {
               
                 markers[indx].setAnimation(google.maps.Animation.BOUNCE);
-                markers[indx].setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
-              
+             
               } else {
                  markers[indx].setAnimation(null);
-                 markers[indx].setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
               }
           if (markers[indx].sYelp === 1){             
-
-                 infowindows[indx].content=markers[indx].sYelpContent;
-                 infowindows[indx].setContent(infowindows[indx].content);
-                 infowindows[indx].open(map,markers[indx]);
+                 infowindowBox.close();
+                 infowindowBox.setContent(markers[indx].sYelpContent);
+                 infowindowBox.open(map,markers[indx]);
             }
           else {
                requestAjax(place);
@@ -149,49 +160,51 @@ function geocodeAddress(address) {
           });
         } 
 /* ---------------------------------------------------
-     Function to add infromation in marker
+     Function to add information in marker
 --------------------------------------------------------*/
   function openWindowMarker(opts){
+    var i,data;
 
-          for (var i=0; i < markers.length; i++){
+          for (i=0; i < markers.length; i++){
 
               if (markers[i].name==opts.name()){
-                var data={name: opts.name(), formatted_address: opts.addr(), ind: i};
+                 data={name: opts.name(), formatted_address: opts.addr(), ind: i};
                   if (markers[i].getAnimation() !== null) {
                       markers[i].setAnimation(google.maps.Animation.BOUNCE)
-                      markers[i].setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
                       
                     } else {
                       markers[i].setAnimation(null);
-                      markers[i].setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
                       
                     }
                  if (markers[i].sYelp === 1){
-                       infowindows[i].content=markers[i].sYelpContent;
-                       infowindows[i].setContent(infowindows[i].content);
-                       infowindows[i].open(map,markers[i]);
+
+                       infowindowBox.close();
+                       infowindowBox.setContent(markers[i].sYelpContent);
+                       infowindowBox.open(map,markers[i]);
                     }
                  else {
+                        
                         requestAjax(data); 
+                        
                     } 
                 }  
             }       
       }
+
 /* ---------------------------------------------------
      Function to filter list
 --------------------------------------------------------*/
    function filterMarkers(opts){
+    var i,j,k;
       
-        for (var i=0; i < markers.length;i++){
+        for (i=0; i < markers.length;i++){
          markers[i].setVisible(false);
-        }
-
-        for (var j=0; j < opts().length;j++){
-          for (var i=0; i < markers.length; i++){
-              if (markers[i].name==opts()[j].name()){
-                  markers[i].setVisible(true);
-                  console.log(markers[i].name + " " + opts()[j].name() +" true");
-                }  
+          }
+        for (j=0; j < opts().length;j++){
+          for (k=0; k < markers.length; k++){
+              if (markers[k].name==opts()[j].name()){
+                  markers[k].setVisible(true);
+               }  
             } 
         }
        }
@@ -199,33 +212,12 @@ function geocodeAddress(address) {
      Function to hide markers from map
 --------------------------------------------------------*/
    function fClearMarkers(){
-      
-        for (var i=0; i < markers.length;i++){
+      var i;
+        for (i=0; i < markers.length;i++){
          markers[i].setVisible(true);
         }
 
        }
-
-/* ---------------------------------------------------
-     Function to handle AJAX timeout 
---------------------------------------------------------*/
-
-  function endTimer(opt){
-
-        clearTimeout(nTimer);
-        markers[opt].setMap(map);
-        infowindows[opt].content="No AJAX response from Yelp";
-        infowindows[opt].setContent(infowindows[opt].content);
-        infowindows[opt].open(map,markers[opt]);               
-  }
-
-/* ---------------------------------------------------
-     Function to start timer for AJAX request
---------------------------------------------------------*/
-  function starTimer(secs,opt){
-    nTimer = setTimeout('endTimer('+opt+')',secs);
-
-  }
 
   /* ---------------------------------------------------
      Function to format marker label
@@ -270,9 +262,6 @@ function geocodeAddress(address) {
     yelp_parameters.oauth_signature = encodedSignature;
 
 
-    starTimer(10000,opts.ind);
-
-
    $.ajax({
     url: yelp_url,
     data: yelp_parameters,
@@ -285,32 +274,44 @@ function geocodeAddress(address) {
     success:function(data) {  
         markers[opts.ind].setMap(map);
         markers[opts.ind].sYelp=1;
-        clearTimeout(nTimer);
-
-      if (data.businesses.length > 0 ){
-
-        markers[opts.ind].sYelpContent=uPdateLabel(data);
-       }
+        
+        if (data.businesses.length > 0 ){
+            markers[opts.ind].sYelpContent=uPdateLabel(data);
+           }
        else{
-          markers[opts.ind].sYelpContent="No Results Found in YELP";
-       } 
-        infowindows[opts.ind].content=markers[opts.ind].sYelpContent;
-        infowindows[opts.ind].setContent(infowindows[opts.ind].content);
-        infowindows[opts.ind].open(map,markers[opts.ind]);
+           markers[opts.ind].sYelpContent="No Results Found in YELP";
+          } 
 
-      },
+          infowindowBox.close();
+          infowindowBox.setContent(markers[opts.ind].sYelpContent);
+          infowindowBox.open(map,markers[opts.ind]);
+        },
 
 /* ---------------------------------------------------
-     Function to handle AJAX fail response
+     Function to handle AJAX error
 --------------------------------------------------------*/
 
-      fail: function(data) {
-        clearTimeout(nTimer);
-        markers[opts.ind].setMap(map);
-        infowindows[opts.ind].content="No Results found in Yelp";
-        infowindows[opts.ind].setContent(infowindows[opts.ind].content);
-        infowindows[opts.ind].open(map,markers[opts.ind]);        
-      
-        }
-      });
-  }
+        error: function(jqXHR, exception) {
+
+            markers[opts.ind].setAnimation(null);
+            
+            if (jqXHR.status === 0) {
+                alert('Not connect.\n Verify Network.');
+            } else if (jqXHR.status == 404) {
+                alert('Requested page not found. [404]');
+            } else if (jqXHR.status == 500) {
+                alert('Internal Server Error [500].');
+            } else if (exception === 'parsererror') {
+                alert('Requested JSON parse failed.');
+            } else if (exception === 'timeout') {
+                alert('Time out error.');
+            } else if (exception === 'abort') {
+                alert('Ajax request aborted.');
+            } else {
+                alert('Uncaught Error.\n' + jqXHR.responseText);
+            }
+          },
+
+   });
+    
+ }

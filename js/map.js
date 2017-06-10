@@ -13,7 +13,7 @@
      function to handle google map API errors
 --------------------------------------------------------*/
      
-function googleError(e) {
+function googleError() {
 
     alert("Error loading Google API ....");
 
@@ -28,26 +28,26 @@ function initMap() {
     var searchArea;
     var options = {
           center: {
-            lat: 29.5,    
+            lat: 29.5,                  //center of map at the begining    
             lng: -98.50  
           },
-          zoom: 13,
-          mapTypeControl: true,
+          zoom: 14,                     // initial zoom for map at start
+          mapTypeControl: true,         // allow user to pan in map 
           mapTypeControlOptions: {
-              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,  // adding mapping tool bar
               position: google.maps.ControlPosition.TOP_CENTER
            },
-            zoomControl: true,
+            zoomControl: true,                                      // allowing user to change zoom level
             zoomControlOptions: {
-               position: google.maps.ControlPosition.RIGHT_BOTTOM
+               position: google.maps.ControlPosition.RIGHT_BOTTOM  // adding zoom tool 
              },
             scaleControl: true,
-            streetViewControl: true,
+            streetViewControl: true,                              // adding street view control and option
             streetViewControlOptions: {
                position: google.maps.ControlPosition.RIGHT_BOTTOM
               },
           
-          visible: true,
+          visible: true, 
           disableDefaultUI : false,
           scrollwheel : true,
           draggable: true,
@@ -126,14 +126,39 @@ function geocodeAddress(address) {
        vm.vFilterArray(vm.ResArray());
      }
 
+/* ---------------------------------------------------
+     Function to start a timer when marker is selected
+     and bouncing start
+--------------------------------------------------------*/
+
   function bounceTimerStart(nSecs,indx) {
        btimer = setTimeout('endTimer(' + indx + ')',nSecs);
       }
 
+/* ---------------------------------------------------
+     Function to stop timer and stop bouncing after 1.5 sec
+--------------------------------------------------------*/
+
   function endTimer(indx) {
+        var i;
         clearTimeout(btimer);
-        markers[indx].setAnimation(null);
+        for (i = 0; i < markers.length; i++)
+          if (markers[i].getAnimation() !== null) {
+                markers[i].setAnimation(null);
+           }
       }
+
+/* ---------------------------------------------------
+     Function to stop all markers that are bouncing 
+     after selecting a new one 
+--------------------------------------------------------*/
+function stopBouncingMarkers(indx){
+        var i;
+          for (i = 0; i < markers.length; i++)
+          if (markers[i].getAnimation() !== null && i !== indx){
+                markers[i].setAnimation(null);
+           }
+        }
 
 /* ---------------------------------------------------
      Function to create markers base in lat and long
@@ -157,20 +182,22 @@ function geocodeAddress(address) {
         place.ind = indx;
         markers[indx].setAnimation(null);
         google.maps.event.addListener(marker, 'click', function() {
-        bounceTimerStart(nSecs,indx);
+        bounceTimerStart(nSecs,indx);             // start timer to control bouncing marker time
+     
 
            if (markers[indx].getAnimation() === null) {
-                markers[indx].setAnimation(google.maps.Animation.BOUNCE);
+                stopBouncingMarkers(indx);                                  // stopping bouncing other markers
+                markers[indx].setAnimation(google.maps.Animation.BOUNCE);   // star bouncing selected marker
                 
-              }
+              } 
 
           if (markers[indx].sYelp === 1) {             
              
-              infowindowBox.close();
-              infowindowBox.setContent(markers[indx].sYelpContent);
-              infowindowBox.open(map,markers[indx]);
+              infowindowBox.close();                                     // closing previous info windows
+              infowindowBox.setContent(markers[indx].sYelpContent);      //  setting infromation to be presented in info window
+              infowindowBox.open(map,markers[indx]);                     // opeing new info window for marker selected
             } else {
-              requestAjax(place);
+              requestAjax(place);                                        // ask Yelp for information for marker selectes
             } 
         });
     }
@@ -187,7 +214,7 @@ function geocodeAddress(address) {
                 bounceTimerStart(nSecs,i);
                 
                 if (markers[i].getAnimation() === null) {
-
+                      stopBouncingMarkers(i);
                       markers[i].setAnimation(google.maps.Animation.BOUNCE);    
                     } 
                 if (markers[i].sYelp === 1) {
@@ -202,7 +229,8 @@ function geocodeAddress(address) {
       }
 
 /* ---------------------------------------------------
-     Function to filter list
+     Function to filter whole array based in the filter
+     text entered
 --------------------------------------------------------*/
    function filterMarkers(opts) {
        var i,j,k;
@@ -219,7 +247,8 @@ function geocodeAddress(address) {
           }
      }
 /* ---------------------------------------------------
-     Function to hide markers from map
+     Function to show all the markers when filter text 
+     is empty or x icon is click in text input from DOM
 --------------------------------------------------------*/
    function fClearMarkers() {
        var i;
@@ -230,7 +259,8 @@ function geocodeAddress(address) {
       }
 
   /* ---------------------------------------------------
-     Function to format marker label
+     Function to format marker label using html format
+     to create a better view
 --------------------------------------------------------*/
   function uPdateLabel(data) {
         contentString ='<div id="content">'+
@@ -250,7 +280,8 @@ function geocodeAddress(address) {
         return contentString; 
       }
 /* ---------------------------------------------------
-     Function to send AJAX request
+     Function to send AJAX request to Yealp requesting
+     information from marker selected
 --------------------------------------------------------*/
   function requestAjax(opts) {
       var yelp_url = 'https://api.yelp.com/v2/search';
@@ -268,7 +299,7 @@ function geocodeAddress(address) {
           limit: 1
        };
 
-      var encodedSignature = oauthSignature.generate('GET', yelp_url, yelp_parameters,'DfGsVrz5heaDRked3LLxDqBxuEA' , '8w3rdVUYDrSWt2kBQUrC-jXpIE8');            //CONSUMER_SECRET_KEY,TOKEN_SECRET_KEY );
+      var encodedSignature = oauthSignature.generate('GET', yelp_url, yelp_parameters,'DfGsVrz5heaDRked3LLxDqBxuEA' , '8w3rdVUYDrSWt2kBQUrC-jXpIE8');//CONSUMER_SECRET_KEY,TOKEN_SECRET_KEY );
       yelp_parameters.oauth_signature = encodedSignature;
 
       $.ajax(
@@ -279,7 +310,8 @@ function geocodeAddress(address) {
            dataType: 'jsonp',
 
 /* ---------------------------------------------------
-     Function to handle AJAX response
+     Function to handle AJAX response if response was
+     successful
 --------------------------------------------------------*/
            success:function(data) {  
                markers[opts.ind].sYelp = 1;
@@ -290,13 +322,13 @@ function geocodeAddress(address) {
                   markers[opts.ind].sYelpContent="No Results Found in YELP";
                 } 
 
-               infowindowBox.close();
-               infowindowBox.setContent(markers[opts.ind].sYelpContent);
-               infowindowBox.open(map,markers[opts.ind]);
+               infowindowBox.close();                                      // making sure closing previous info windows
+               infowindowBox.setContent(markers[opts.ind].sYelpContent);   // setting content before presenting in info window
+               infowindowBox.open(map,markers[opts.ind]);                  // showing info window after AJAX request
              },
 
 /* ---------------------------------------------------
-     Function to handle AJAX error
+     Function to handle most common AJAX errors
 --------------------------------------------------------*/
 
            error: function(jqXHR, exception) {

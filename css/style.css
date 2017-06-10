@@ -5,16 +5,16 @@
     position: fixed; /* Stay in place */
     z-index: 1; /* Stay on top */
     top: 0px;
-    left:-0px;
+    left: 0px;
     background-color: #111; /* Black*/
     overflow-x: hidden; /* Disable vertical */
-    overflow-y:hidden;  /* Disable horizontal scroll */
+    overflow-y: hidden;  /* Disable horizontal scroll */
     padding-top: 20px; /* Place content 60px from the top */
     transition: 0.6s;  /* 0.5 second transition effect to slide in the sidenav */
     opacity: 0.8;
 }
 
-.sidenavOpen{
+.sidenavOpen {
     width: 200px; /* opening window using sideNavStatus  from css ko bindng*/
 }
 
@@ -28,14 +28,16 @@
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenav li:hover, .offcanvas li:focus{
+.sidenav li:hover, 
+.offcanvas li:focus {
     color: #ffffff;
     background: #024b9d;
 }
 
 
 /* Position and style the close button (top right corner) */
-.sidenav .closebtn {
+.sidenav 
+.closebtn {
     position: absolute;
     top: 0;
     right: 25px;
@@ -44,7 +46,7 @@
     z-index: 2;
 }
 
-.closebtn{
+.closebtn {
     color:#cfcfcf;;
     cursor:  pointer;
     position: absolute;
@@ -55,7 +57,7 @@
     z-index: 2;
 }
 
-.mapMain{
+.mapMain {
     position: absolute; /* Stay in place */
     z-index: -1; /* Stay on the botton  */
     top: 0;
@@ -65,17 +67,18 @@
     width: 100vw;
 }
 
-.control{
+.control {
 color:#cfcfcf;
 padding: 0px 0px 0px 0px;
 
 }
 
-.nav-list{
+.nav-list {
  overflow-y:auto; 
  height: 70%;  
 }
-.nav-items{
+
+.nav-items {
     padding: 0px;
     text-decoration: none;
     font-size: 10px;

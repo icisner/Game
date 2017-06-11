@@ -1,5 +1,5 @@
 
-.sidenav {
+.side-nav {
     height: 100%; /* 100% Full-height */
     width: 0px; /* 0 width to start */
     position: fixed; /* Stay in place */
@@ -14,21 +14,35 @@
     opacity: 0.8;
 }
 
-.sidenavOpen {
+.close-nav-bot {
+    font-size: 30px;
+    cursor: pointer;
+    background-color: white;
+    padding-left: 4px;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+ }
+
+.side-nav-open {
     width: 200px; /* opening window using sideNavStatus  from css ko bindng*/
 }
 
-.sidenav a {
-    padding: 8px 8px 8px 8px;
+.side-nav a {
+
+    padding-left: 8px;
+    padding-top: 8px;
+    padding-right: 8px;
+    padding-bottom: 8px;
     text-decoration: none;
     font-size: 18px;
-    color: #cfcfcf; 
+    color: #cfcfcf;
     display: block;
     cursor: pointer;
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenav li:hover, 
+.side-nav li:hover,
 .offcanvas li:focus {
     color: #ffffff;
     background: #024b9d;
@@ -36,8 +50,8 @@
 
 
 /* Position and style the close button (top right corner) */
-.sidenav 
-.closebtn {
+.side-nav
+.close-btn {
     position: absolute;
     top: 0;
     right: 25px;
@@ -46,7 +60,7 @@
     z-index: 2;
 }
 
-.closebtn {
+.close-btn {
     color:#cfcfcf;;
     cursor:  pointer;
     position: absolute;
@@ -57,25 +71,27 @@
     z-index: 2;
 }
 
-.mapMain {
+.map-main {
     position: absolute; /* Stay in place */
     z-index: -1; /* Stay on the botton  */
     top: 0;
-    left:0;
+    left: 0;
     background-color:gray;
     height: 100vh;
     width: 100vw;
 }
 
 .control {
-color:#cfcfcf;
-padding: 0px 0px 0px 0px;
-
+    color: #cfcfcf;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
 }
 
 .nav-list {
- overflow-y:auto; 
- height: 70%;  
+ overflow-y: auto;
+ height: 70%;
 }
 
 .nav-items {
@@ -84,23 +100,29 @@ padding: 0px 0px 0px 0px;
     font-size: 10px;
     color: #cfcfcf; /* #818181; */
     display: block;
-    cursor: pointer;   
+    cursor: pointer;
     text-align: left;
 }
 
 
 #main {
-    
+
     padding: 20px;
 }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+/*  change padding and fint size for small screen like
+  less than 600px wide and 450px height */
+
 @media screen and (max-height: 450px ) and (max-width: 600px)  {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 20px;}
+    .side-nav {padding-top: 15px;}
+    .side-nav a {font-size: 20px;}
     .control{
-            color:#cfcfcf;
-            padding: 1px 1px 1px 1px;
+            color: #cfcfcf;
+            padding-left: 1px;
+            padding-top: 1px;
+            padding-right: 1px;
+            padding-bottom: 1px;
+           }
         }
 
-}
+    }

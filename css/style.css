@@ -1,19 +1,35 @@
-
 .side-nav {
-    height: 100%; /* 100% Full-height */
-    width: 0px; /* 0 width to start */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
+    height: 100%;
+    /* 100% Full-height */
+    
+    width: 0px;
+    /* 0 width to start */
+    
+    position: fixed;
+    /* Stay in place */
+    
+    z-index: 1;
+    /* Stay on top */
+    
     top: 0px;
     left: 0px;
-    background-color: #111; /* Black*/
-    overflow-x: hidden; /* Disable vertical */
-    overflow-y: hidden;  /* Disable horizontal scroll */
-    padding-top: 20px; /* Place content 60px from the top */
-    transition: 0.6s;  /* 0.5 second transition effect to slide in the sidenav */
+    background-color: #111;
+    /* Black*/
+    
+    overflow-x: hidden;
+    /* Disable vertical */
+    
+    overflow-y: hidden;
+    /* Disable horizontal scroll */
+    
+    padding-top: 20px;
+    /* Place content 60px from the top */
+    
+    transition: 0.6s;
+    /* 0.5 second transition effect to slide in the sidenav */
+    
     opacity: 0.8;
 }
-
 .close-nav-bot {
     font-size: 30px;
     cursor: pointer;
@@ -22,14 +38,12 @@
     padding-top: 4px;
     padding-right: 4px;
     padding-bottom: 4px;
- }
-
-.side-nav-open {
-    width: 200px; /* opening window using sideNavStatus  from css ko bindng*/
 }
-
+.side-nav-open {
+    width: 200px;
+    /* opening window using sideNavStatus  from css ko bindng*/
+}
 .side-nav a {
-
     padding-left: 8px;
     padding-top: 8px;
     padding-right: 8px;
@@ -40,18 +54,16 @@
     display: block;
     cursor: pointer;
 }
-
 /* When you mouse over the navigation links, change their color */
+
 .side-nav li:hover,
 .offcanvas li:focus {
     color: #ffffff;
     background: #024b9d;
 }
-
-
 /* Position and style the close button (top right corner) */
-.side-nav
-.close-btn {
+
+.side-nav .close-btn {
     position: absolute;
     top: 0;
     right: 25px;
@@ -59,10 +71,10 @@
     margin-left: 50px;
     z-index: 2;
 }
-
 .close-btn {
-    color:#cfcfcf;;
-    cursor:  pointer;
+    color: #cfcfcf;
+    ;
+    cursor: pointer;
     position: absolute;
     top: 0;
     right: 15px;
@@ -70,17 +82,19 @@
     margin-left: 50px;
     z-index: 2;
 }
-
 .map-main {
-    position: absolute; /* Stay in place */
-    z-index: -1; /* Stay on the botton  */
+    position: absolute;
+    /* Stay in place */
+    
+    z-index: -1;
+    /* Stay on the botton  */
+    
     top: 0;
     left: 0;
-    background-color:gray;
+    background-color: gray;
     height: 100vh;
     width: 100vw;
 }
-
 .control {
     color: #cfcfcf;
     padding-left: 0px;
@@ -88,41 +102,40 @@
     padding-right: 0px;
     padding-bottom: 0px;
 }
-
 .nav-list {
- overflow-y: auto;
- height: 70%;
+    overflow-y: auto;
+    height: 70%;
 }
-
 .nav-items {
     padding: 0px;
     text-decoration: none;
     font-size: 10px;
-    color: #cfcfcf; /* #818181; */
+    color: #cfcfcf;
+    /* #818181; */
+    
     display: block;
     cursor: pointer;
     text-align: left;
 }
-
-
 #main {
-
     padding: 20px;
 }
-
 /*  change padding and fint size for small screen like
   less than 600px wide and 450px height */
 
-@media screen and (max-height: 450px ) and (max-width: 600px)  {
-    .side-nav {padding-top: 15px;}
-    .side-nav a {font-size: 20px;}
-    .control{
-            color: #cfcfcf;
-            padding-left: 1px;
-            padding-top: 1px;
-            padding-right: 1px;
-            padding-bottom: 1px;
-           }
-        }
-
+@media screen and (max-height: 450px) and (max-width: 600px) {
+    .side-nav {
+        padding-top: 15px;
     }
+    .side-nav a {
+        font-size: 20px;
+    }
+    .control {
+        color: #cfcfcf;
+        padding-left: 1px;
+        padding-top: 1px;
+        padding-right: 1px;
+        padding-bottom: 1px;
+    }
+}
+}

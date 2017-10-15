@@ -1,62 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>UdaciFeeds</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<head>
-    <title>Local Restauranrs</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,700">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/icomoon.css">
+        <link rel="stylesheet" href="css/style.css">
 
-    <!-- _________________________________________________
+        <link rel="stylesheet" href="jasmine/lib/jasmine-2.1.2/jasmine.css">
 
-      Setting view port to match device width
-   _______________________________________________________-->
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-
-<body>
-
-    <div id="my-side-nav" class="side-nav" data-bind="css: {'side-nav-open': sideNavStatus}">
-        <a data-bind="click : fcloseNav" class="close-btn">&times;</a>
-
-        <div class="control">
-            <h3>Local Restaurants</h3>
-            <p class="Zip-label">Enter Address</p>
-            <input class="inpt" data-bind="value:ZipCode">
-            <p></p>
-            <button class="btn" data-bind="click:disZipCode">Search</button>
-        </div>
-        <p></p>
-
-        <div class="control">
-            <p class="Filter-label">Filter</p>
-            <input class="inpt" placeholder="Search..." type="search" name="q" data-bind="value: sQuery, valueUpdate: 'keyup', event: { input: fCleared }" autocomplete="off">
-            <p></p>
-        </div>
-
-        <div class="nav-list">
-            <ul class="nav-items" data-bind="foreach: vFilterArray">
-                <li class="nav-item" data-bind="click: $parent.oMarkerInfo">
-                    <a class="nav-idv-item" href='#'>
-               <span data-bind = "text: name"></span>
+        <script src="jasmine/lib/jasmine-2.1.2/jasmine.js"></script>
+      <!-- <script src="jasmine/libs/mock-ajax.js"></script> --> 
+        <script src="jasmine/lib/jasmine-2.1.2/jasmine-html.js"></script>
+        <script src="jasmine/lib/jasmine-2.1.2/boot.js"></script>
+        <script src="jasmine/lib/jasmine-2.1.2/jasmine-jquery.js"></script>
+         
+    </head>
+    <body class="menu-hidden">
+        <div class="header">
+            <a href="#" class="menu-icon-link">
+                <i class="icon-list"></i>
             </a>
-                    <br>
-                </li>
-            </ul>
-        </div>
-    </div>
 
-    <span class="close-nav-bot" data-bind="click :fopenNav">&#9776;</span>
-    <div id="map" class="map-main">
-    </div>
-    <script src="ko/knockout-3.4.0.js"></script>
-    <script src="ko/komapping-2.4.1.js"></script>
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/oauth-signature.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/map.js">
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBf_LgqHPFPxbBUk4Cv4AUaexm56EgyS8&libraries=places&callback=initMap" onerror="googleError()">
-    </script>
-</body>
+            <h1 class="header-title">Feeds</h1>
+        </div>
+
+        <div class="slide-menu">
+            <ul class="feed-list"></ul>
+        </div>
+
+        <div class="feed"></div>
+
+        <script class="tpl-entry" type="text/x-handlebars-template">
+            <a class="entry-link" href="{{link}}">
+                <article class="entry">
+                    <h2>{{title}}</h2>
+                    <p>{{contentSnippet}}</p>
+                </article>
+            </a>
+        </script>
+
+        <script class="tpl-feed-list-item" type="text/x-handlebars-template">
+            <li>
+                <a href="#" data-id="{{id}}">{{name}}</a>
+            </li>
+        </script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="http://cdn.jsdelivr.net/handlebarsjs/2.0.0/handlebars.min.js"></script>
+        <script src="http://google.com/jsapi"></script>
+        <script src="js/app.js"></script>
+
+        <script src="jasmine/spec/feedreader.js"></script>
+    </body>
+</html>

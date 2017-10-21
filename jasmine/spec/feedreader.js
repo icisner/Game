@@ -36,7 +36,6 @@ $(function() {
 
     describe('allFeeds Check loop name and url',function(){
     var id=0;
- 
                
        function testSpec1(p){
          it('Name and url are defined in feed item ' + p, function() {
@@ -44,23 +43,18 @@ $(function() {
             expect(allFeeds[p].url.length).not.toBe(0);
         });
        }
-     
        for (var i=0; i < allFeeds.length; i++){
          testSpec1(i);        
        }
-
       });
 
-
-
-    describe('Check Menu hide',function(){
+/*    describe('Check Menu hide',function(){
     var id=0;
     var spyEvent;
 
         beforeEach(function() {
         setUpHTMLFixture();
        });
-
       it ("should invoke the btnShowMessage click event.", function() {
           spyEvent = spyOnEvent('#btnShowMessage', 'click');
           $('#btnShowMessage').trigger( "click" );
@@ -77,41 +71,30 @@ $(function() {
          expect(spyEvent).toHaveBeenTriggered();
         });
       });
-
-
+*/
 
     describe('Check for name and url',function(){
     var id=0;
  
-
-        beforeEach( function(done){
+      beforeEach( function(done){
             loadFeed(id,done);
-
         }); 
-               
        function testSpec(p){
          it('Name and url are defined in feed item ' + p, function() {
             expect(allEntries[p].title.length).not.toBe(0);
             expect(allEntries[p].link.length).not.toBe(0);
         });
        }
-     
-       for (var i=0; i < 10;i++){
+      /* allEntries global variable not avilable at the begining */
+        for (var i=0; i < 10;i++){
          testSpec(i);        
        }
-
       });
-
-
-        
       
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-    
-
-
     /* TODO: Write a new test suite named "The menu" */
 
         /* TODO: Write a test that ensures the menu element is

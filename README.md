@@ -7,11 +7,11 @@
   $> cd /path/to/your-project-folder
   $> python -m SimpleHTTPServer 8080
   ```
-** Write a test that loops through each feed in the `allFeeds` object and ensures it has a URL and name are defined and not empty **
+**Write a test that loops through each feed in the `allFeeds` object and ensures it has a URL and name are defined and not empty**
 
 
 
-** Write a new test suite named `"The menu"` that ensures the menu element is hidden by default **
+**Write a new test suite named `"The menu"` that ensures the menu element is hidden by default**
 
 
 ### Write a test that ensures the menu changes visibility when the menu icon is clicked

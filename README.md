@@ -19,17 +19,20 @@ Here are more details about the test required and some information how did appro
 
 1. Test that loops through each feed in the `allFeeds` object and ensures it has a URL and name are defined and not empty
    
-   Using 'forEach' to loop all the feeds and testing using match '.not.toBe()'
+   Using `forEach` to loop all the feeds and testing using match `.not.toBe()`
 
 
 2. New test suite named `"The menu"` that ensures the menu element is hidden by default
 
+   Using jQuery and DOM attributes to get `$('body').attr('class')` the class and then test if that is hidden or not
 
 3. Test that ensures the menu changes visibility when the menu icon is clicked
-
+   
+   Using jQuery and `click` property `$('.icon-list').click()` to check if menu changes status
 
 4. New test suite named `"Initial Entries” ‘that ensures when the `loadFeed` function is called and completes its work, there is at least a single `.entry` element within the `.feed` container.
-
+   
+   Using `done()` function to get back to Jasmine after AJAX request and forEach to loop trough elements
 
 5. Test suite named `"New Feed Selection"` that ensures when a new feed is loaded by the `loadFeed` function that the content changes.
 

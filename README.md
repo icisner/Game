@@ -1,21 +1,38 @@
 # Feed Reader Testing project
 
 ## About This Project
-The idea of this project is given a web-based application which reads RSS feeds perform several tests using [Jasmine js](https://jasmine.github.io/2.1/introduction) Unit test. There is one basic test initially defined and six more has being asked to do to complete
+The idea of this project is given a web-based application which reads RSS feeds perform several tests using [Jasmine js](https://jasmine.github.io/2.1/introduction) Unit test. There is one basic test initially defined and six more has being asked to do to complete which includes controlling jQuery [AJAX](http://api.jquery.com/jquery.ajax/) request, controlling DOM elements, HTML, CSS, mouse click. Mode details of requirements [Project Rubric](https://review.udacity.com/#!/projects/3442558598/rubric)
 
 ## Getting Started
-* To load the feed reader app with the jasmine specsheet simply clone this repository or create a pull request.Get more information about pull requests [here](https://help.github.com/articles/creating-a-pull-request/).
-* If you aren't comfortable with either of these, another option would be to simply download the zip file.
-* Download or fork the application from [here.](https://github.com/22guille/feedReader)
-* Select the index.html file to start the application.
+* Loading can be done cloning this repository or creating a pull request. You can get more information about pull requests [here](https://help.github.com/articles/creating-a-pull-request/).
+* Another option would be to download the zip file.
+* To start application open index.html file
+* It is recommended to clean Cache files to avoid issues when running application. You can use key combination Crtl+Shift+Del for Chrome more information [click here](https://support.google.com/accounts/answer/32050?co=GENIE.Platform%3DDesktop&hl=en)
+* It is not required but is better to test using localserver instead just opening application from a local folder. I have been using Apache here more information [click here](https://www.apachefriends.org/index.html)
 
 ## Requirement
-The specsheet has been tested only on Chrome, so it is recommended that you use it for further testing and review.
+Chrome browser has been used for all the test it is recommended to use it for further testing and review.
 
-## Diving in Deep
-* If you want to write further tests you may do so, in the feedreader.js file in the spec subfolder of the jasmine folder.I have written some basic tests which address the basic functionality of the application, so if you want to test more, you'll have to add more features.
-To write more tests you can refer to the jasmine framework documentation [here](https://22guille.github.io/feedReader/)
-* The functionality of this app is implemented in app.js so you can use it to give it some more functionality.
+## Implementation details
+Here are more details about the test required and some information how did approach these tests 
+
+
+1. Test that loops through each feed in the `allFeeds` object and ensures it has a URL and name are defined and not empty
+   
+   Using 'forEach' to loop all the feeds and testing using match '.not.toBe()'
+
+
+2. New test suite named `"The menu"` that ensures the menu element is hidden by default
+
+
+3. Test that ensures the menu changes visibility when the menu icon is clicked
+
+
+4. New test suite named `"Initial Entries” ‘that ensures when the `loadFeed` function is called and completes its work, there is at least a single `.entry` element within the `.feed` container.
+
+
+5. Test suite named `"New Feed Selection"` that ensures when a new feed is loaded by the `loadFeed` function that the content changes.
 
 ### License
+
 This application has no license.

@@ -35,7 +35,6 @@ Here are more details about the test required and some information how did appro
    Using `done()` function to get back to Jasmine after AJAX request and forEach to loop trough elements
 
 5. Test suite named `"New Feed Selection"` that ensures when a new feed is loaded by the `loadFeed` function that the content changes.
+   
+   Using JQuery and 'click' property to get '$('.feed-list a:first-child')[0]' to load a new feed to test with a second feed as request
 
-### License
-
-This application has no license.

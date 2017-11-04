@@ -25,7 +25,10 @@ $(function() {
          * page?
          */
 
-        it('are defined', function() {
+
+        /* checking if allFeeds are definned and not empty*/
+        
+        it('Test to check if allFeeds are defined', function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
@@ -36,7 +39,10 @@ $(function() {
          * and that the URL is not empty.
          */
 
-        it('url is defined and not empty', function() {
+        /* checking if allFeeds urls are definned and not empty
+           using forArch to loop and check all the items in allFeeds */
+        
+        it('Test to check if allFeeds url is defined and not empty', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.url).not.toBe();
             })
@@ -47,7 +53,10 @@ $(function() {
          * and that the name is not empty.
          */
 
-        it('name is defined and not empty', function() {
+        /* checking if allFeeds names are definned and not empty
+           using forArch to loop and check all the items in allFeeds */
+              
+        it('Test to check if allFeeds name is defined and not empty', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.name).not.toBe();
             })
@@ -65,7 +74,11 @@ $(function() {
 
     describe('The menu', function() {
 
-        it(' check for hiddem menu', function() {
+
+        /* checking if menu element is hidden by default using DOM class element propperty
+           and comparing with menu-hidden to make sure is set in that mode */
+        
+        it('Test to check if menu is hiddenn initially', function() {
             expect($('body').attr('class')).toBe('menu-hidden');
         });
 
@@ -76,7 +89,10 @@ $(function() {
          * clicked and does it hide when clicked again.
          */
 
-        it('check for menu display if clicked ', function() {
+        /* checking if menu element shows up after clicing icon using click event under  
+           icon-list DOM element and ccomparing with body class menu-hidden to be not true */
+
+        it('Test to check if menu is displayed if menu icon is clicked ', function() {
 
             $('.icon-list').click();
             expect($('body').attr('class')).not.toBe('menu-hidden');
@@ -100,11 +116,15 @@ $(function() {
     describe('Initial Entries', function() {
         var id = 0;
 
+        /* checking if loadFeed function loads atr least one element using beforeEach to loop trought the elements
+           and using done function to wait for AJAX request and then check the length for DOM element feed entry  
+           not to be true */
+
         beforeEach(function(done) {
             loadFeed(id, done);
         });
 
-        it('There is at least one entry ', function() {
+        it('Test to check if loadFeed load at least one entry ', function() {
 
             expect($('.feed .entry').length).not.toBe(0);
         })
@@ -120,30 +140,36 @@ $(function() {
 
     describe('New feed Selection', function() {
 
+        /* Definning two variables to hold two objects for loadFeed function results
+           to be able to compare two runs for this fucnction */
+
         var feed1;
         var feed2;
 
-        beforeEach(function(done) {
+        /* checking if loadFeed's results are different when selecting different menu 
+           to do that I am using two nested loadFead calls so store the results in feed1 and feed 2
+           Also before second call I am using a click event for first feed-list element to get a new feed
+           and store in feed DOM element into feed2 variable and finally calling done function to wait 
+           for AJAX request to finish */
 
+        beforeEach(function(done) {
             loadFeed(0, function() {
 
               feed1 = $('.feed').html();
-              
               $('.feed-list a:first-child')[0].click();
-              
               done();
 
               loadFeed(1, function() {
-                
                 feed2 = $('.feed').html();
                 done();
-
               });
-
             });
         });
 
-        it('check if new feed is loaded  ', function() {
+        /* comparing both feed1 and feed2 loaded for two different calls to loadFeed function are differents
+           to pass the test */
+
+        it('Test to check if new feed is loaded  ', function() {
             expect(feed1).not.toBe(feed2);
          })
     });

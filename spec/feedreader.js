@@ -45,7 +45,7 @@ $(function() {
         it('Test to check if allFeeds url is defined and not empty', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.url).not.toBe();
-            })
+            });
         });
 
         /* TODO: Write a test that loops through each feed
@@ -59,7 +59,7 @@ $(function() {
         it('Test to check if allFeeds name is defined and not empty', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.name).not.toBe();
-            })
+            });
         });
     });
 
@@ -127,7 +127,7 @@ $(function() {
         it('Test to check if loadFeed load at least one entry ', function() {
 
             expect($('.feed .entry').length).not.toBe(0);
-        })
+        });
     });
 
 
@@ -171,6 +171,6 @@ $(function() {
 
         it('Test to check if new feed is loaded  ', function() {
             expect(feed1).not.toBe(feed2);
-         })
+         });
     });
 }());

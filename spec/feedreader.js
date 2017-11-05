@@ -99,7 +99,7 @@ $(function() {
         it('Test to check if menu is displayed if menu icon is clicked ', function() {
 
            /* removing delay for offscreen to be able to test */
-              $('.slide-menu').css('transition','transform 0s')
+              $('.slide-menu').css('transition','transform 0s');
            
            /* clicking the menu-list to check if shows up */   
               $('.icon-list').click();

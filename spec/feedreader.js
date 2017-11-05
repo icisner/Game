@@ -94,9 +94,12 @@ $(function() {
 
         it('Test to check if menu is displayed if menu icon is clicked ', function() {
 
+            $('.slide-menu').css('transition','transform 0s');
             $('.icon-list').click();
             expect($('body').attr('class')).not.toBe('menu-hidden');
             $('.icon-list').click();
+            expect($('body').attr('class')).toBe('menu-hidden');
+            $('.slide-menu').css('transition','transform 0.2s');
 
         });
     });

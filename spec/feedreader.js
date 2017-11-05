@@ -44,7 +44,10 @@ $(function() {
         
         it('Test to check if allFeeds url is defined and not empty', function() {
             allFeeds.forEach(function(feed) {
-                expect(feed.url).not.toBe();
+                
+                expect(feed.url).toBeDefined();
+                expect(feed.url).not.toBe(null); 
+
             });
         });
 
@@ -58,7 +61,8 @@ $(function() {
               
         it('Test to check if allFeeds name is defined and not empty', function() {
             allFeeds.forEach(function(feed) {
-                expect(feed.name).not.toBe();
+                expect(feed.name).toBeDefined();
+                expect(feed.name).not.toBe(null);
             });
         });
     });
@@ -76,10 +80,10 @@ $(function() {
 
 
         /* checking if menu element is hidden by default using DOM class element propperty
-           and comparing with menu-hidden to make sure is set in that mode */
+           hidden and check if it is true */
         
         it('Test to check if menu is hiddenn initially', function() {
-            expect($('body').attr('class')).toBe('menu-hidden');
+            expect($('.slide-menu').position().left < 0 ).toBe(true);
         });
 
 
@@ -90,18 +94,29 @@ $(function() {
          */
 
         /* checking if menu element shows up after clicing icon using click event under  
-           icon-list DOM element and ccomparing with body class menu-hidden to be not true */
+           icon-list DOM element and ccomparing with position since we are using offscree techinque */
 
         it('Test to check if menu is displayed if menu icon is clicked ', function() {
 
-            $('.slide-menu').css('transition','transform 0s');
-            $('.icon-list').click();
-            expect($('body').attr('class')).not.toBe('menu-hidden');
-            $('.icon-list').click();
-            expect($('body').attr('class')).toBe('menu-hidden');
-            $('.slide-menu').css('transition','transform 0.2s');
+           /* removing delay for offscreen to be able to test */
+              $('.slide-menu').css('transition','transform 0s')
+           
+           /* clicking the menu-list to check if shows up */   
+              $('.icon-list').click();
 
-        });
+           /* checking if offscreen menu is inside of the screen */   
+              expect($('.slide-menu').position().left < 0 ).not.toBe(true);
+
+           /* clicking second time to see if menu got hidden again */   
+              $('.icon-list').click();
+
+           /* checking if offscreen menu is out side of screen */   
+              expect($('.slide-menu').position().left < 0 ).toBe(true);
+              
+           /* putting back transiiton time of 200 ms */
+              $('.slide-menu').css('transition','transform 0.2s');
+          });
+
     });
 
 
@@ -160,8 +175,6 @@ $(function() {
 
               feed1 = $('.feed').html();
               $('.feed-list a:first-child')[0].click();
-              done();
-
               loadFeed(1, function() {
                 feed2 = $('.feed').html();
                 done();
